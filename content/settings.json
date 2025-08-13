@@ -5,13 +5,9 @@
     "blurb": "All gifts support chapter programming, service projects, and scholarship."
   },
   "forms": {
-    "mode": "formspree",
-    "alumni_endpoint": "https://formspree.io/f/YOUR_ALUMNI_ID",
-    "family_endpoint": "https://formspree.io/f/YOUR_FAMILY_ID"
+    "mode": "netlify"
   },
-  "goals": {
-    "use_function": false
-  },
+  "goals": { "use_function": false },
   "alumni": {
     "homecoming2025": {
       "rsvp_url": "https://forms.gle/YOUR_GOOGLE_FORM_ID"
