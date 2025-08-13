@@ -103,4 +103,66 @@ collections:
     fields:
       - { label: Title, name: title }
       - { label: Date (YYYY-MM-DD), name: date }
-      - { l
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: Location, name: location, required: false }
+      - { label: Photo, name: photo, widget: image, required: false }
+  - name: "events_community_service"
+    label: "Events – Community Service"
+    folder: "content/events/community-service"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: Title, name: title }
+      - { label: Date (YYYY-MM-DD), name: date }
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: Location, name: location, required: false }
+      - { label: Photo, name: photo, widget: image, required: false }
+  - name: "events_philanthropy"
+    label: "Events – Philanthropy"
+    folder: "content/events/philanthropy"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: Title, name: title }
+      - { label: Date (YYYY-MM-DD), name: date }
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: Location, name: location, required: false }
+      - { label: Photo, name: photo, widget: image, required: false }
+  - name: "events_social"
+    label: "Events – Social"
+    folder: "content/events/social"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: Title, name: title }
+      - { label: Date (YYYY-MM-DD), name: date }
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: Location, name: location, required: false }
+      - { label: Photo, name: photo, widget: image, required: false }
+  - name: "events_brotherhood"
+    label: "Events – Brotherhood"
+    folder: "content/events/brotherhood"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: Title, name: title }
+      - { label: Date (YYYY-MM-DD), name: date }
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: Location, name: location, required: false }
+      - { label: Photo, name: photo, widget: image, required: false }
+  - name: "events_academic"
+    label: "Events – Academic"
+    folder: "content/events/academic"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: Title, name: title }
+      - { label: Date (YYYY-MM-DD), name: date }
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: Location, name: location, required: false }
+      - { label: Photo, name: photo, widget: image, required: false }
