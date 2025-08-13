@@ -193,25 +193,122 @@
     </section>
 
     <!-- Donate -->
-    <section id="donate" class="section">
-      <div class="container">
-        <header class="section-header">
-          <h2>Support ΔΧ Purdue</h2>
-          <p>Help us grow brotherhood, service, and leadership on campus</p>
-        </header>
+<section id="donate" class="section">
+  <div class="container">
+    <header class="section-header">
+      <h2>Support ΔΧ Purdue</h2>
+      <p>Help us grow brotherhood, service, and leadership on campus</p>
+    </header>
 
-        <div class="donate-panel">
-          <div>
-            <p id="donateBlurb">All donations support chapter programming, service projects, and scholarship initiatives.</p>
-            <div class="cta-row">
-              <a id="donateLink" class="btn btn-gold" href="#" target="_blank" rel="noopener">Donate Now</a>
-              <button id="copyDonateLink" class="btn" type="button">Copy Link</button>
-            </div>
-            <div id="donateQr" class="qr"></div>
-          </div>
+    <!-- Two-path donate intro -->
+    <div class="donate-tabs" role="tablist" aria-label="Donation Types">
+      <button class="tab-btn active" data-tab="alumni" role="tab" aria-selected="true">Alumni</button>
+      <button class="tab-btn" data-tab="family" role="tab" aria-selected="false">Parents / Family & Friends</button>
+    </div>
+
+    <div class="donate-panels">
+      <!-- Alumni panel -->
+      <div id="panel-alumni" class="form-card active" role="tabpanel" aria-labelledby="alumni">
+        <p class="muted">Alumni: add your name (and class year if you’d like) so we can recognize your support.</p>
+
+        <!-- One click to donation processor -->
+        <div class="cta-row">
+          <a id="donateLinkAlumni" class="btn btn-gold" href="#" target="_blank" rel="noopener">Donate as Alumni</a>
+          <button id="copyDonateLinkAlumni" class="btn" type="button">Copy Link</button>
         </div>
+
+        <!-- Acknowledgment form -->
+        <!-- Works on Netlify out-of-the-box. For GitHub Pages, set Formspree endpoints in content/settings.json (forms). -->
+        <form id="alumniForm"
+              name="alumni-support"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              class="stack"
+        >
+          <input type="hidden" name="form-name" value="alumni-support" />
+          <div aria-hidden="true" style="display:none">
+            <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+          </div>
+
+          <div class="grid-2">
+            <label>Full Name
+              <input name="name" type="text" placeholder="e.g., Alex Martin" required />
+            </label>
+            <label>Class Year (optional)
+              <input name="class_year" type="text" placeholder="e.g., 2012" />
+            </label>
+          </div>
+          <label>Email (optional)
+            <input name="email" type="email" placeholder="you@example.com" />
+          </label>
+          <label>Public Message (optional)
+            <textarea name="message" rows="2" placeholder="Add a short note we can display on the donor wall"></textarea>
+          </label>
+
+          <button class="btn" type="submit">Add Me to Donor Wall</button>
+          <small class="muted">Submissions are reviewed before appearing publicly.</small>
+        </form>
       </div>
-    </section>
+
+      <!-- Family & Friends panel -->
+      <div id="panel-family" class="form-card" role="tabpanel" aria-labelledby="family">
+        <p class="muted">Parents, family, and friends: tell us who you’re supporting so we can thank you properly.</p>
+
+        <div class="cta-row">
+          <a id="donateLinkFamily" class="btn btn-gold" href="#" target="_blank" rel="noopener">Donate as Family/Friend</a>
+          <button id="copyDonateLinkFamily" class="btn" type="button">Copy Link</button>
+        </div>
+
+        <form id="familyForm"
+              name="family-support"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              class="stack"
+        >
+          <input type="hidden" name="form-name" value="family-support" />
+          <div aria-hidden="true" style="display:none">
+            <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+          </div>
+
+          <div class="grid-2">
+            <label>Your Name
+              <input name="name" type="text" placeholder="e.g., Priya Sabale" required />
+            </label>
+            <label>Related To
+              <input name="related_to" type="text" placeholder="e.g., Aarnav Sabale" required />
+            </label>
+          </div>
+          <label>Email (optional)
+            <input name="email" type="email" placeholder="you@example.com" />
+          </label>
+          <label>Public Message (optional)
+            <textarea name="message" rows="2" placeholder="Add a short note we can display on the donor wall"></textarea>
+          </label>
+
+          <button class="btn" type="submit">Add Me to Donor Wall</button>
+          <small class="muted">Submissions are reviewed before appearing publicly.</small>
+        </form>
+      </div>
+    </div>
+
+    <!-- Goal tracker -->
+    <div class="goal-wrap">
+      <h3>Chapter Goals</h3>
+      <div id="goalsList" class="goals"></div>
+      <small class="muted">Tip: Exec can update progress in the CMS. Optional auto-updates available if hosted on Netlify.</small>
+    </div>
+
+    <!-- Donor wall -->
+    <div class="donor-wall">
+      <h3>Donor Wall</h3>
+      <div class="filters" id="donorFilters"></div>
+      <div id="donorList" class="donors" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
 
     <!-- Contact -->
     <section id="contact" class="section">
