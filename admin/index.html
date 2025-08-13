@@ -15,6 +15,22 @@
     <strong>ΔΧ Purdue – Content Manager</strong>
     <a href="../">← Back to site</a>
   </header>
+
+  <!-- Netlify Identity (needs to be on this page AND at least your home page) -->
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', user => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            // root-relative path is safest on Netlify
+            window.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+
   <!-- Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
