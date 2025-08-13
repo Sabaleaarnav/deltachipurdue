@@ -2,28 +2,59 @@ backend:
   name: git-gateway
   branch: main
 
-publish_mode: simple  
-media_folder: "assets/images"
-public_folder: "/assets/images"
+publish_mode: simple        # instant publish (no PR workflow)
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
 
 collections:
   - name: "settings"
     label: "Site Settings"
-    files:
-      - name: "general"
-        label: "General"
-        file: "content/settings.json"
+    file: "content/settings.json"
+    fields:
+      - label: "Donate"
+        name: donate
+        widget: object
         fields:
-          - { name: donate, label: Donate, widget: object, fields: [
-              { name: url, label: Donate URL, widget: string, hint: "Paste Stripe/Givebutter/PayPal link" },
-              { name: blurb, label: Blurb, widget: text, required: false }
-            ] }
-          - { name: alumni, label: Alumni, widget: object, fields: [
-              { name: homecoming2025, label: Homecoming 2025, widget: object, fields: [
-                  { name: rsvp_url, label: RSVP URL (Google Form), widget: string }
-                ] }
-            ] }
-    - name: "donors"
+          - { label: "Alumni Link", name: url, widget: string }
+          - { label: "Family/Friends Link", name: url_family, widget: string, required: false }
+          - { label: "Blurb", name: blurb, widget: text, required: false }
+      - label: "Forms"
+        name: forms
+        widget: object
+        fields:
+          - { label: "Mode", name: mode, widget: select, options: ["netlify","formspree","disabled"], default: "netlify" }
+          - { label: "Alumni Formspree Endpoint", name: alumni_endpoint, widget: string, required: false }
+          - { label: "Family Formspree Endpoint", name: family_endpoint, widget: string, required: false }
+      - label: "Goals"
+        name: goals
+        widget: object
+        fields:
+          - { label: "Use server function", name: use_function, widget: boolean, default: false }
+      - label: "Alumni"
+        name: alumni
+        widget: object
+        fields:
+          - label: "Homecoming 2025"
+            name: homecoming2025
+            widget: object
+            fields:
+              - { label: "RSVP URL", name: rsvp_url, widget: string, required: false }
+
+  - name: "leadership"
+    label: "Leadership"
+    file: "content/leadership.json"
+    fields:
+      - label: "Members"
+        name: members
+        widget: list
+        fields:
+          - { label: "Name", name: name }
+          - { label: "Role/Position", name: role }
+          - { label: "Email", name: email, required: false }
+          - { label: "Photo", name: photo, widget: image, required: false }
+
+  - name: "donors"
     label: "Donor Wall"
     file: "content/donors.json"
     fields:
@@ -49,92 +80,27 @@ collections:
           - { name: title, label: Title }
           - { name: goal_amount, label: Goal Amount, widget: number, value_type: int }
           - { name: current_amount, label: Current Amount, widget: number, value_type: int, required: false }
-          - { name: source, label: Source, widget: select, options: ["manual"] }
-
-
-  - name: "leadership"
-    label: "Leadership"
-    file: "content/leadership.json"
-    fields:
-      - label: Members
-        name: members
-        widget: list
-        fields:
-          - { name: name, label: Name }
-          - { name: role, label: Role }
-          - { name: email, label: Email, required: false }
-          - { name: photo, label: Photo, widget: image, required: false }
-
-  - name: "events_alumni"
-    label: "Events – Alumni"
-    folder: "content/events/alumni"
-    create: true
-    slug: "{{slug}}"
-    extension: "json"
-    fields:
-      - { name: title, label: Title }
-      - { name: date, label: Date, widget: datetime, time_format: false }
-      - { name: description, label: Description, widget: text }
-      - { name: location, label: Location }
-      - { name: photo, label: Photo, widget: image, required: false }
-
-  - name: "events_community"
-    label: "Events – Community Service"
-    folder: "content/events/community-service"
-    create: true
-    slug: "{{slug}}"
-    extension: "json"
-    fields:
-      - { name: title, label: Title }
-      - { name: date, label: Date, widget: datetime, time_format: false }
-      - { name: description, label: Description, widget: text }
-      - { name: location, label: Location }
-      - { name: photo, label: Photo, widget: image, required: false }
-
-  - name: "events_philanthropy"
-    label: "Events – Philanthropy"
-    folder: "content/events/philanthropy"
-    create: true
-    slug: "{{slug}}"
-    extension: "json"
-    fields: &event_fields
-      - { name: title, label: Title }
-      - { name: date, label: Date, widget: datetime, time_format: false }
-      - { name: description, label: Description, widget: text }
-      - { name: location, label: Location }
-      - { name: photo, label: Photo, widget: image, required: false }
-
-  - name: "events_social"
-    label: "Events – Social"
-    folder: "content/events/social"
-    create: true
-    slug: "{{slug}}"
-    extension: "json"
-    fields: *event_fields
-
-  - name: "events_brotherhood"
-    label: "Events – Brotherhood"
-    folder: "content/events/brotherhood"
-    create: true
-    slug: "{{slug}}"
-    extension: "json"
-    fields: *event_fields
-
-  - name: "events_academic"
-    label: "Events – Academic"
-    folder: "content/events/academic"
-    create: true
-    slug: "{{slug}}"
-    extension: "json"
-    fields: *event_fields
+          - { name: source, label: Source, widget: select, options: ["manual"], default: "manual" }
 
   - name: "gallery"
     label: "Gallery"
     folder: "content/gallery"
     create: true
     extension: "json"
-    slug: "{{slug}}"
+    format: "json"
     fields:
-      - { name: title, label: Title }
-      - { name: description, label: Description, widget: text, required: false }
-      - { name: photo, label: Photo, widget: image }
+      - { label: Title, name: title }
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: Photo, name: photo, widget: image }
+
+  # Events by category (you can add/remove as needed)
+  - name: "events_alumni"
+    label: "Events – Alumni"
+    folder: "content/events/alumni"
+    create: true
+    extension: "json"
+    format: "json"
+    fields:
+      - { label: Title, name: title }
+      - { label: Date (YYYY-MM-DD), name: date }
+      - { l
