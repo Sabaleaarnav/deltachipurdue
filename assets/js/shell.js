@@ -1,16 +1,14 @@
-// Injects site header/footer on every page. Active link is set via <body data-page="...">.
-
 (function(){
   const page = document.body.dataset.page || "";
   const nav = [
-    { id:"home",     href:"index.html",   label:"Home" },
-    { id:"about",    href:"about.html",   label:"About" },
-    { id:"programs", href:"programs.html",label:"Programs" },
-    { id:"events",   href:"events.html",  label:"Events" },
-    { id:"gallery",  href:"gallery.html", label:"Gallery" },
-    { id:"alumni",   href:"alumni.html",  label:"Alumni" },
-    { id:"donate",   href:"donate.html",  label:"Donate" },
-    { id:"contact",  href:"contact.html", label:"Contact" }
+    { id:"home",       href:"index.html",     label:"Home" },
+    { id:"programs",   href:"programs.html",  label:"Programs" },
+    { id:"leadership", href:"leadership.html",label:"Leadership" },
+    { id:"events",     href:"events.html",    label:"Events" },
+    { id:"gallery",    href:"gallery.html",   label:"Gallery" },
+    { id:"alumni",     href:"alumni.html",    label:"Alumni" },
+    { id:"donate",     href:"donate.html",    label:"Donate" },
+    { id:"contact",    href:"contact.html",   label:"Contact" }
   ];
 
   const header = `
@@ -31,7 +29,6 @@
       </div>
     </div>
   `;
-
   const footer = `
     <div class="site-footer">
       <div class="container footer-inner">
@@ -40,31 +37,28 @@
       </div>
     </div>
   `;
-
   const h = document.getElementById('site-header');
   const f = document.getElementById('site-footer');
   if (h) h.innerHTML = header;
   if (f) f.innerHTML = footer;
 
-  // mobile drawer logic
+  const y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+
   const toggle = document.querySelector('.nav-toggle');
   const drawer = document.querySelector('.mobile-drawer');
   if (toggle && drawer){
     toggle.addEventListener('click', ()=>{
       const open = drawer.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-expanded', open ? 'true':'false');
       document.body.classList.toggle('no-scroll', open);
     });
     drawer.addEventListener('click', (e)=>{
-      if(e.target.classList.contains('mobile-drawer')) {
+      if(e.target.classList.contains('mobile-drawer')){
         drawer.classList.remove('open');
         toggle.setAttribute('aria-expanded','false');
         document.body.classList.remove('no-scroll');
       }
     });
   }
-
-  // year
-  const y = document.getElementById('year');
-  if (y) y.textContent = new Date().getFullYear();
 })();
