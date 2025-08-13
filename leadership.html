@@ -1,31 +1,38 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>ΔΧ Purdue – Leadership</title>
-  <link rel="stylesheet" href="assets/css/styles.css"/>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ΔΧ Purdue – Leadership</title>
+<link rel="stylesheet" href="assets/css/styles.css"/>
 </head>
 <body data-page="leadership">
-  <header id="site-header"></header>
-  <main>
-    <section class="section">
-      <div class="container">
-        <header class="section-header">
-          <h2>Leadership</h2>
-          <p>Meet the executive board guiding our chapter.</p>
-        </header>
+<header id="site-header"></header>
+<main>
+  <section class="section">
+    <div class="container">
+      <header class="section-header">
+        <h2>Leadership</h2>
+        <p>Executive Board, Recruitment, and Associate Member Counselors.</p>
+      </header>
 
-        <!-- President & VP (large) -->
-        <div id="leadersFeatured" class="leaders-featured"></div>
-
-        <!-- Other exec (smaller tiles) -->
-        <div id="leadersGrid" class="leadership-grid sm"></div>
+      <!-- Tabs -->
+      <div class="filters" id="leaderTabs">
+        <button class="filter-chip active" data-tab="exec">Executive</button>
+        <button class="filter-chip" data-tab="recruit">Recruitment</button>
+        <button class="filter-chip" data-tab="amc">Associate Member Counselors</button>
       </div>
-    </section>
-  </main>
-  <footer id="site-footer"></footer>
-  <script src="assets/js/shell.js"></script>
-  <script src="assets/js/app.js" defer></script>
+
+      <!-- Featured (President & VP) only on Exec -->
+      <div id="leadersFeatured" class="leaders-featured"></div>
+
+      <!-- Grids -->
+      <div id="leadersExec" class="leadership-grid sm"></div>
+      <div id="leadersRecruit" class="leadership-grid sm" style="display:none"></div>
+      <div id="leadersAmc" class="leadership-grid sm" style="display:none"></div>
+    </div>
+  </section>
+</main>
+<footer id="site-footer"></footer>
+<script src="assets/js/shell.js"></script>
+<script src="assets/js/app.js" defer></script>
 </body>
 </html>
