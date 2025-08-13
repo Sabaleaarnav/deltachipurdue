@@ -1,150 +1,114 @@
 backend:
   name: git-gateway
   branch: main
-
-publish_mode: simple        # instant publish
+publish_mode: simple
 
 media_folder: "assets/images/uploads"
 public_folder: "/assets/images/uploads"
 
+site_url: "/"
+
 collections:
-  # ------- Single-file collections -------
   - name: "settings"
     label: "Site Settings"
     files:
-      - name: "settings"
+      - file: "content/settings.json"
         label: "Settings"
-        file: "content/settings.json"
+        name: "settings"
         fields:
-          - label: "Donate"
-            name: donate
-            widget: object
-            fields:
-              - { label: "Alumni Link", name: url, widget: string }
-              - { label: "Family/Friends Link", name: url_family, widget: string, required: false }
-              - { label: "Blurb", name: blurb, widget: text, required: false }
-          - label: "Forms"
-            name: forms
-            widget: object
-            fields:
-              - { label: "Mode", name: mode, widget: select, options: ["netlify","formspree","disabled"], default: "netlify" }
-              - { label: "Alumni Formspree Endpoint", name: alumni_endpoint, widget: string, required: false }
-              - { label: "Family Formspree Endpoint", name: family_endpoint, widget: string, required: false }
-          - label: "Goals"
-            name: goals
-            widget: object
-            fields:
-              - { label: "Use server function", name: use_function, widget: boolean, default: false }
-          - label: "Alumni"
-            name: alumni
-            widget: object
-            fields:
-              - label: "Homecoming 2025"
-                name: homecoming2025
-                widget: object
-                fields:
-                  - { label: "RSVP URL", name: rsvp_url, widget: string, required: false }
+          - {label: "Donate URL (Alumni)", name: "donate.url", widget: "string", required: false}
+          - {label: "Donate URL (Parents/Family)", name: "donate.url_family", widget: "string", required: false}
+          - {label: "Forms mode", name: "forms.mode", widget: "select", options: ["netlify","formspree","disabled"], required: false}
+          - {label: "Formspree Alumni Endpoint", name: "forms.alumni_endpoint", widget: "string", required: false}
+          - {label: "Formspree Family Endpoint", name: "forms.family_endpoint", widget: "string", required: false}
+          - {label: "Alumni RSVP URL", name: "alumni.homecoming2025.rsvp_url", widget: "string", required: false}
 
   - name: "leadership"
     label: "Leadership"
     files:
-      - name: "leadership"
-        label: "Leadership"
-        file: "content/leadership.json"
+      - file: "content/leadership.json"
+        label: "Leadership Members"
+        name: "leadership"
         fields:
           - label: "Members"
-            name: members
-            widget: list
+            name: "members"
+            widget: "list"
             fields:
-              - { label: "Name", name: name }
-              - { label: "Role/Position", name: role }
-              - { label: "Email", name: email, required: false }
-              - { label: "Photo", name: photo, widget: image, required: false }
+              - {label: "Name", name: "name", widget: "string"}
+              - {label: "Role", name: "role", widget: "string"}
+              - {label: "Email", name: "email", widget: "string", required: false}
+              - {label: "Photo", name: "photo", widget: "image", required: false}
 
-  - name: "donors"
-    label: "Donor Wall"
-    files:
-      - name: "donors"
-        label: "Donors"
-        file: "content/donors.json"
-        fields:
-          - label: Donors
-            name: donors
-            widget: list
-            fields:
-              - { name: type, label: Type, widget: select, options: ["alumni","family"] }
-              - { name: name, label: Name }
-              - { name: class_year, label: Class Year (alumni), required: false }
-              - { name: related_to, label: Related To (family), required: false }
-              - { name: message, label: Public Message, widget: text, required: false }
-
-  - name: "goals"
-    label: "Goals"
-    files:
-      - name: "goals"
-        label: "Goals"
-        file: "content/goals.json"
-        fields:
-          - label: Goals
-            name: goals
-            widget: list
-            fields:
-              - { name: slug,  label: Slug }
-              - { name: title, label: Title }
-              - { name: goal_amount, label: Goal Amount, widget: number, value_type: int }
-              - { name: current_amount, label: Current Amount, widget: number, value_type: int, required: false }
-              - { name: source, label: Source, widget: select, options: ["manual"], default: "manual" }
-
-  # ------- Gallery as a single JSON file -------
   - name: "gallery"
     label: "Gallery"
     files:
-      - name: "gallery_index"
-        label: "Photos"
-        file: "content/gallery/index.json"
+      - file: "content/gallery/index.json"
+        label: "Gallery Items"
+        name: "gallery"
         fields:
-          - label: "Photos"
-            name: items
-            widget: list
+          - label: "Items"
+            name: "items"
+            widget: "list"
             fields:
-              - { label: "Title", name: title }
-              - { label: "Description", name: description, widget: text, required: false }
-              - { label: "Photo", name: photo, widget: image }
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Description", name: "description", widget: "text", required: false}
+              - {label: "Photo", name: "photo", widget: "image"}
 
-  # ------- Events: one JSON per category (simplest for the site to read) -------
   - name: "events"
-    label: "Events (by Category)"
+    label: "Events"
     files:
-      - name: "events_alumni"
-        label: "Alumni"
-        file: "content/events/alumni.json"
-        fields:
-          - label: "Events"
-            name: items
-            widget: list
-            fields:
-              - { label: "Title", name: title }
-              - { label: "Date (YYYY-MM-DD)", name: date }
-              - { label: "Description", name: description, widget: text, required: false }
-              - { label: "Location", name: location, required: false }
-              - { label: "Photo", name: photo, widget: image, required: false }
-      - name: "events_cs"
-        label: "Community Service"
-        file: "content/events/community-service.json"
-        fields: *events_alumni_fields
-      - name: "events_phil"
-        label: "Philanthropy"
-        file: "content/events/philanthropy.json"
-        fields: *events_alumni_fields
-      - name: "events_social"
-        label: "Social"
-        file: "content/events/social.json"
-        fields: *events_alumni_fields
-      - name: "events_brotherhood"
+      - file: "content/events/brotherhood.json"
         label: "Brotherhood"
-        file: "content/events/brotherhood.json"
-        fields: *events_alumni_fields
-      - name: "events_academic"
-        label: "Academic"
-        file: "content/events/academic.json"
-        fields: *events_alumni_fields
+        name: "events_brotherhood"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Date (YYYY-MM-DD)", name: "date", widget: "string", required: false}
+              - {label: "Location", name: "location", widget: "string", required: false}
+              - {label: "Description", name: "description", widget: "text", required: false}
+              - {label: "Photo", name: "photo", widget: "image", required: false}
+
+      - file: "content/events/community-service.json"
+        label: "Community Service"
+        name: "events_community_service"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Date (YYYY-MM-DD)", name: "date", widget: "string", required: false}
+              - {label: "Location", name: "location", widget: "string", required: false}
+              - {label: "Description", name: "description", widget: "text", required: false}
+              - {label: "Photo", name: "photo", widget: "image", required: false}
+
+      - file: "content/events/philanthropy.json"
+        label: "Philanthropy"
+        name: "events_philanthropy"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Date (YYYY-MM-DD)", name: "date", widget: "string", required: false}
+              - {label: "Location", name: "location", widget: "string", required: false}
+              - {label: "Description", name: "description", widget: "text", required: false}
+              - {label: "Photo", name: "photo", widget: "image", required: false}
+
+      - file: "content/events/fundraising.json"
+        label: "Fundraising"
+        name: "events_fundraising"
+        fields:
+          - label: "Items"
+            name: "items"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Date (YYYY-MM-DD)", name: "date", widget: "string", required: false}
+              - {label: "Location", name: "location", widget: "string", required: false}
+              - {label: "Description", name: "description", widget: "text", required: false}
+              - {label: "Photo", name: "photo", widget: "image", required: false}
