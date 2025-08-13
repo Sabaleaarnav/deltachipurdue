@@ -62,6 +62,60 @@ async function loadJSON(path){
     } catch {}
   }
 
+  //LEADERSHIP
+if (document.body.dataset.page === 'leadership') {
+  (async function(){
+    try{
+      const data = await loadJSON('content/leadership.json');
+      const members = data.members || [];
+
+      // find President and VP
+      const pres = members.find(m => /president/i.test(m.role) && !/vice/i.test(m.role));
+      const vp   = members.find(m => /vice|vp/i.test(m.role));
+
+      // others (exclude pres & vp)
+      const others = members.filter(m => m !== pres && m !== vp);
+
+      const f = document.getElementById('leadersFeatured');
+      if(f){
+        const items = [pres, vp].filter(Boolean).map(m => {
+          const img = m.photo || 'assets/images/placeholder-avatar.png';
+          return `
+            <article class="leader-lg">
+              <img src="${img}" alt="${m.name} – ${m.role}" loading="lazy"/>
+              <div>
+                <h3>${m.name}</h3>
+                <div class="role">${m.role}</div>
+                ${m.email ? `<div><a href="mailto:${m.email}">${m.email}</a></div>`:''}
+              </div>
+            </article>`;
+        }).join('');
+        f.innerHTML = items || '<p class="muted">Add President and Vice President in CMS → Leadership.</p>';
+      }
+
+      const g = document.getElementById('leadersGrid');
+      if(g){
+        g.innerHTML = others.map(m=>{
+          const img = m.photo || 'assets/images/placeholder-avatar.png';
+          return `
+            <article class="leader-sm">
+              <img src="${img}" alt="${m.name} – ${m.role}" loading="lazy"/>
+              <h4>${m.name}</h4>
+              <div class="role">${m.role}</div>
+              ${m.email ? `<div><a href="mailto:${m.email}">${m.email}</a></div>`:''}
+            </article>`;
+        }).join('');
+      }
+    }catch{
+      const f = document.getElementById('leadersFeatured');
+      const g = document.getElementById('leadersGrid');
+      if(f) f.innerHTML = '<p class="muted">Unable to load leadership yet.</p>';
+      if(g) g.innerHTML = '';
+    }
+  })();
+}
+
+
   // EVENTS (+ filters)
   if(page==='events'){
     const categories = ['alumni','community-service','philanthropy','social','brotherhood','academic'];
