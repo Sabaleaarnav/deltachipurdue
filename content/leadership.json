@@ -7,12 +7,12 @@
     { "name": "Liam Simpson", "role": "Alumni Relations", "email": "alumni@deltachipurdue.org", "photo": "" },
     { "name": "Kaden Harrison", "role": "Risk Manager", "email": "", "photo": "" },
     { "name": "Zach O'Connell", "role": "Scholarship Chair", "email": "", "photo": "" },
-    { "name": "Nick Dolce", "role": "Recruitment Chair", "email": "recruitment@deltachipurdue.org", "photo": "" },
-    { "name": "Jonah Pomerantz", "role": "Recruitment Chair", "email": "recruitment@deltachipurdue.org", "photo": "" },
-    { "name": "Sean", "role": "Recruitment Chair", "email": "recruitment@deltachipurdue.org", "photo": "" },
-    { "name": "B.Sheppie", "role": "Associate Member Counselor", "email": "", "photo": "" },
-    { "name": "Justin Siclovan", "role": "Associate Member Counselor", "email": "", "photo": "" },
-    { "name": "Riley Omar", "role": "Associate Member Counselor", "email": "", "photo": "" },
+    { "name": "Nick Dolce", "role": "Associate Member Counselor", "email": "amcpurdue", "photo": "" },
+    { "name": "Jonah Pomerantz", "role": "Associate Member Counselor", "email": "amcpurdue", "photo": "" },
+    { "name": "Sean", "role": "Associate Member Counselor", "email": "amcpurdue", "photo": "" },
+    { "name": "B.Sheppie", "role": "Recruitment Chair", "email": "", "photo": "" },
+    { "name": "Justin Siclovan", "role": "Recruitment Chair", "email": "", "photo": "" },
+    { "name": "Riley Omar", "role": "Recruitment Chair", "email": "", "photo": "" },
     { "name": "Jessica Robinson (Jessie)", "role": "House Mom", "email": "jessica@glscommercialmgnt.com", "photo": "" }
   ]
 }
