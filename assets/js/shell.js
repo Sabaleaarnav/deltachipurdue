@@ -1,16 +1,14 @@
 (function(){
   const page = document.body.dataset.page || "";
   const nav = [
-    { id:"home",       href:"index.html",     label:"Home" },
-    { id:"programs",   href:"programs.html",  label:"Programs" },
-    { id:"leadership", href:"leadership.html",label:"Leadership" },
-    { id:"events",     href:"events.html",    label:"Events" },
-    { id:"gallery",    href:"gallery.html",   label:"Gallery" },
-    { id:"alumni",     href:"alumni.html",    label:"Alumni" },
-    { id:"donate",     href:"donate.html",    label:"Donate" },
-    { id:"contact",    href:"contact.html",   label:"Contact" }
+    { id:"home",       href:"index.html",       label:"Home" },
+    { id:"initiatives",href:"programs.html",    label:"Initiatives" },  // renamed
+    { id:"leadership", href:"leadership.html",  label:"Leadership" },
+    { id:"events",     href:"events.html",      label:"Events" },
+    { id:"gallery",    href:"gallery.html",     label:"Gallery" },
+    { id:"alumni",     href:"alumni.html",      label:"Alumni" },
+    { id:"donate",     href:"donate.html",      label:"Donate" }
   ];
-
   const header = `
     <div class="site-header">
       <div class="container nav">
@@ -33,7 +31,6 @@
     <div class="site-footer">
       <div class="container footer-inner">
         <small>© <span id="year"></span> Delta Chi – Purdue University</small>
-        <a class="footer-admin" href="admin/">Admin Login</a>
       </div>
     </div>
   `;
