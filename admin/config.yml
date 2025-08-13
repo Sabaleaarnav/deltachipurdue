@@ -25,6 +25,34 @@ collections:
                   { name: rsvp_url, label: RSVP URL (Google Form), widget: string }
                 ] }
             ] }
+    - name: "donors"
+    label: "Donor Wall"
+    file: "content/donors.json"
+    fields:
+      - label: Donors
+        name: donors
+        widget: list
+        fields:
+          - { name: type, label: Type, widget: select, options: ["alumni","family"] }
+          - { name: name, label: Name }
+          - { name: class_year, label: Class Year (alumni), required: false }
+          - { name: related_to, label: Related To (family), required: false }
+          - { name: message, label: Public Message, widget: text, required: false }
+
+  - name: "goals"
+    label: "Goals"
+    file: "content/goals.json"
+    fields:
+      - label: Goals
+        name: goals
+        widget: list
+        fields:
+          - { name: slug, label: Slug }
+          - { name: title, label: Title }
+          - { name: goal_amount, label: Goal Amount, widget: number, value_type: int }
+          - { name: current_amount, label: Current Amount, widget: number, value_type: int, required: false }
+          - { name: source, label: Source, widget: select, options: ["manual"] }
+
 
   - name: "leadership"
     label: "Leadership"
