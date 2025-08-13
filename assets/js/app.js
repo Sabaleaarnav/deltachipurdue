@@ -62,105 +62,91 @@ async function loadJSON(path){
     } catch {}
   }
 
-  //LEADERSHIP
-if (document.body.dataset.page === 'leadership') {
+  // LEADERSHIP: featured + tabbed groups
+if (page === 'leadership') {
   (async function(){
     try{
       const data = await loadJSON('content/leadership.json');
       const members = data.members || [];
 
-      // find President and VP
-      const pres = members.find(m => /president/i.test(m.role) && !/vice/i.test(m.role));
-      const vp   = members.find(m => /vice|vp/i.test(m.role));
+      // helpers
+      const photoOr = (m)=> m.photo || 'assets/images/placeholder-avatar.png';
+      const cardSM = (m)=>`
+        <article class="leader-sm">
+          <img src="${photoOr(m)}" alt="${m.name} – ${m.role}" loading="lazy"/>
+          <h4>${m.name}</h4>
+          <div class="role">${m.role}</div>
+          ${m.email ? `<div><a href="mailto:${m.email}">${m.email}</a></div>`:''}
+        </article>`;
 
-      // others (exclude pres & vp)
-      const others = members.filter(m => m !== pres && m !== vp);
+      // sort into groups
+      const isRecruit = m => /recruitment/i.test(m.role);
+      const isAmc     = m => /associate\s*member\s*counselor/i.test(m.role);
 
-      const f = document.getElementById('leadersFeatured');
-      if(f){
-        const items = [pres, vp].filter(Boolean).map(m => {
-          const img = m.photo || 'assets/images/placeholder-avatar.png';
-          return `
+      const execAll = members.filter(m => !isRecruit(m) && !isAmc(m));
+      const pres = execAll.find(m => /president/i.test(m.role) && !/vice/i.test(m.role));
+      const vp   = execAll.find(m => /vice|vp/i.test(m.role));
+      const execOthers = execAll.filter(m => m !== pres && m !== vp);
+
+      const recruits = members.filter(isRecruit);
+      const amc = members.filter(isAmc);
+
+      // featured
+      const featured = document.getElementById('leadersFeatured');
+      if (featured){
+        if (pres || vp){
+          featured.innerHTML = [pres, vp].filter(Boolean).map(m=>`
             <article class="leader-lg">
-              <img src="${img}" alt="${m.name} – ${m.role}" loading="lazy"/>
-              <div>
-                <h3>${m.name}</h3>
-                <div class="role">${m.role}</div>
-                ${m.email ? `<div><a href="mailto:${m.email}">${m.email}</a></div>`:''}
-              </div>
-            </article>`;
-        }).join('');
-        f.innerHTML = items || '<p class="muted">Add President and Vice President in CMS → Leadership.</p>';
+              <img src="${photoOr(m)}" alt="${m.name} – ${m.role}" loading="lazy"/>
+              <div><h3>${m.name}</h3><div class="role">${m.role}</div>
+              ${m.email ? `<div><a href="mailto:${m.email}">${m.email}</a></div>`:''}</div>
+            </article>`).join('');
+        } else featured.style.display = 'none';
       }
 
-      const g = document.getElementById('leadersGrid');
-      if(g){
-        g.innerHTML = others.map(m=>{
-          const img = m.photo || 'assets/images/placeholder-avatar.png';
-          return `
-            <article class="leader-sm">
-              <img src="${img}" alt="${m.name} – ${m.role}" loading="lazy"/>
-              <h4>${m.name}</h4>
-              <div class="role">${m.role}</div>
-              ${m.email ? `<div><a href="mailto:${m.email}">${m.email}</a></div>`:''}
-            </article>`;
-        }).join('');
-      }
-    }catch{
-      const f = document.getElementById('leadersFeatured');
-      const g = document.getElementById('leadersGrid');
-      if(f) f.innerHTML = '<p class="muted">Unable to load leadership yet.</p>';
-      if(g) g.innerHTML = '';
+      // fill grids
+      const fill = (id, list)=>{ const el = document.getElementById(id); if(el) el.innerHTML = list.map(cardSM).join(''); }
+      fill('leadersExec', execOthers);
+      fill('leadersRecruit', recruits);
+      fill('leadersAmc', amc);
+
+      // tabs
+      const tabs = document.getElementById('leaderTabs');
+      tabs?.addEventListener('click', (e)=>{
+        const b = e.target.closest('.filter-chip'); if(!b) return;
+        tabs.querySelectorAll('.filter-chip').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+        const tab = b.dataset.tab;
+        document.getElementById('leadersFeatured').style.display = (tab==='exec' ? '' : 'none');
+        document.getElementById('leadersExec').style.display = (tab==='exec' ? '' : 'none');
+        document.getElementById('leadersRecruit').style.display = (tab==='recruit' ? '' : 'none');
+        document.getElementById('leadersAmc').style.display = (tab==='amc' ? '' : 'none');
+      });
+    }catch(e){
+      document.getElementById('leadersExec').innerHTML = '<p class="muted">Leadership coming soon.</p>';
     }
   })();
 }
 
 
+
   // EVENTS (+ filters)
   if(page==='events'){
-    const categories = ['alumni','community-service','philanthropy','social','brotherhood','academic'];
-    let allEvents = [];
-    for(const cat of categories){
-      try{
-        const idx = await fetch(`content/events/${cat}/index.json`,{cache:'no-store'});
-        if(idx.ok){
-          const list = await idx.json();
-          for(const f of list.files){
-            const ev = await loadJSON(`content/events/${cat}/${f}`);
-            ev.category = cat;
-            allEvents.push(ev);
-          }
-        }
-      }catch{}
-    }
-    allEvents.sort((a,b)=> new Date(a.date) - new Date(b.date));
-
-    const filters = $('#eventFilters');
-    const listEl = $('#eventsList');
-
-    function draw(list){
-      if(!listEl) return;
-      if(!list.length){ listEl.innerHTML = `<p class="muted" style="text-align:center">No events yet.</p>`; return; }
-      listEl.innerHTML = list.map(ev=>{
-        const thumb = ev.photo ? `<img class="thumb" src="${ev.photo}" alt="${ev.title}" loading="lazy"/>` : `<div class="thumb" aria-hidden="true"></div>`;
-        const badge = `<span class="badge">${ev.category.replace('-',' ').toUpperCase()}</span>`;
-        return `<article class="event">${thumb}<div class="date">${fmtDate(ev.date)}</div><h3>${ev.title}</h3><div>${badge}</div><p>${ev.description||''}</p><div><strong>Location:</strong> ${ev.location||'TBA'}</div></article>`;
-      }).join('');
-    }
-
-    if(filters){
-      filters.innerHTML = ['all',...categories].map(c=>`<button class="filter-chip ${c==='all'?'active':''}" data-cat="${c}">${c.replace('-',' ').replace(/\b\w/g,s=>s.toUpperCase())}</button>`).join('');
-      $$('#eventFilters .filter-chip').forEach(b=>{
-        b.addEventListener('click', ()=>{
-          $$('#eventFilters .filter-chip').forEach(x=>x.classList.remove('active'));
-          b.classList.add('active');
-          const cat = b.dataset.cat;
-          draw(cat==='all' ? allEvents : allEvents.filter(e=>e.category===cat));
-        });
-      });
-    }
-    draw(allEvents);
+  const categories = ['alumni','community-service','philanthropy','social','brotherhood','academic'];
+  let allEvents = [];
+  for(const cat of categories){
+    try{
+      const res = await fetch(`content/events/${cat}.json`,{cache:'no-store'});
+      if(res.ok){
+        const json = await res.json();
+        (json.items||[]).forEach(ev => allEvents.push({...ev, category:cat}));
+      }
+    }catch{}
   }
+  allEvents.sort((a,b)=> new Date(a.date) - new Date(b.date));
+  // ... keep the rest of your rendering exactly as you have it
+}
+
 
   // ALUMNI: RSVP + ICS
   if(page==='alumni'){
