@@ -131,21 +131,74 @@ if (page === 'leadership') {
 
 
   // EVENTS (+ filters)
-  if(page==='events'){
-  const categories = ['alumni','community-service','philanthropy','social','brotherhood','academic'];
-  let allEvents = [];
-  for(const cat of categories){
+  // EVENTS (+ filters) — flat JSON per category
+if (page === 'events') {
+  const categories = ['brotherhood','community-service','philanthropy','fundraising'];
+  let all = [];
+
+  async function loadCategory(cat){
     try{
-      const res = await fetch(`content/events/${cat}.json`,{cache:'no-store'});
-      if(res.ok){
-        const json = await res.json();
-        (json.items||[]).forEach(ev => allEvents.push({...ev, category:cat}));
-      }
-    }catch{}
+      const res = await fetch(`content/events/${cat}.json`, {cache:'no-store'});
+      if(!res.ok) return [];
+      const data = await res.json();
+      const items = Array.isArray(data.items) ? data.items : [];
+      // attach category to each item
+      return items.map(it => ({...it, category: cat}));
+    }catch{ return []; }
   }
-  allEvents.sort((a,b)=> new Date(a.date) - new Date(b.date));
-  // ... keep the rest of your rendering exactly as you have it
+
+  (async ()=>{
+    const batches = await Promise.all(categories.map(loadCategory));
+    all = batches.flat();
+    // sort by date (ascending)
+    all.sort((a,b)=> new Date(a.date||'2100-01-01') - new Date(b.date||'2100-01-01'));
+
+    const filters = $('#eventFilters');
+    const listEl  = $('#eventsList');
+
+    function draw(list){
+      if(!listEl) return;
+      if(!list.length){
+        listEl.innerHTML = `<p class="muted" style="text-align:center">No events yet.</p>`;
+        return;
+      }
+      listEl.innerHTML = list.map(ev=>{
+        const thumb = ev.photo ? `<img class="thumb" src="${ev.photo}" alt="${ev.title||''}" loading="lazy"/>`
+                               : `<div class="thumb" aria-hidden="true"></div>`;
+        const badge = `<span class="badge">${ev.category.replace('-',' ').toUpperCase()}</span>`;
+        const dstr  = ev.date ? fmtDate(ev.date) : 'TBA';
+        return `
+          <article class="event">
+            ${thumb}
+            <div class="date">${dstr}</div>
+            <h3>${ev.title||''}</h3>
+            <div>${badge}</div>
+            ${ev.description?`<p>${ev.description}</p>`:''}
+            <div><strong>Location:</strong> ${ev.location||'TBA'}</div>
+          </article>`;
+      }).join('');
+    }
+
+    // build filter chips
+    if(filters){
+      filters.innerHTML = ['all',...categories]
+        .map(c=>`<button class="filter-chip ${c==='all'?'active':''}" data-cat="${c}">
+                    ${c.replace('-',' ').replace(/\b\w/g,s=>s.toUpperCase())}
+                  </button>`).join('');
+      $$('#eventFilters .filter-chip').forEach(b=>{
+        b.addEventListener('click', ()=>{
+          $$('#eventFilters .filter-chip').forEach(x=>x.classList.remove('active'));
+          b.classList.add('active');
+          const cat=b.dataset.cat;
+          draw(cat==='all' ? all : all.filter(e=>e.category===cat));
+        });
+      });
+    }
+
+    draw(all);
+  })();
 }
+
 
 
   // ALUMNI: RSVP + ICS
