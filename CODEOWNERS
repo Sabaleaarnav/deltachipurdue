@@ -1,0 +1,23 @@
+# Replace @handles with actual GitHub usernames.
+# Require reviews from specific owners when files in these paths change.
+
+# Exec-level site settings & leadership
+/content/settings.json @PresidentGitHub @AarnavGitHub @AlumniRelationsGitHub
+/content/leadership.json @PresidentGitHub @AarnavGitHub
+
+# Alumni events – Alumni Relations + Exec
+/content/events/alumni/** @AlumniRelationsGitHub @PresidentGitHub @AarnavGitHub
+
+# Community Service events – CS Chair + Exec
+/content/events/community-service/** @CommunityServiceChairGitHub @PresidentGitHub @AarnavGitHub
+
+# Philanthropy events – Philanthropy Chair + Exec
+/content/events/philanthropy/** @PhilanthropyChairGitHub @PresidentGitHub @AarnavGitHub
+
+# Social / Brotherhood / Academic – respective chairs + Exec
+/content/events/social/** @SocialChairGitHub @PresidentGitHub @AarnavGitHub
+/content/events/brotherhood/** @BrotherhoodChairGitHub @PresidentGitHub @AarnavGitHub
+/content/events/academic/** @ScholarshipChairGitHub @PresidentGitHub @AarnavGitHub
+
+# Gallery – allow PRs from designated roles; exec reviews
+/content/gallery/** @PresidentGitHub @AarnavGitHub

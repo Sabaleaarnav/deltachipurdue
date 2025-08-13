@@ -1,0 +1,114 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME
+  branch: main
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "general"
+        label: "General"
+        file: "content/settings.json"
+        fields:
+          - { name: donate, label: Donate, widget: object, fields: [
+              { name: url, label: Donate URL, widget: string, hint: "Paste Stripe/Givebutter/PayPal link" },
+              { name: blurb, label: Blurb, widget: text, required: false }
+            ] }
+          - { name: alumni, label: Alumni, widget: object, fields: [
+              { name: homecoming2025, label: Homecoming 2025, widget: object, fields: [
+                  { name: rsvp_url, label: RSVP URL (Google Form), widget: string }
+                ] }
+            ] }
+
+  - name: "leadership"
+    label: "Leadership"
+    file: "content/leadership.json"
+    fields:
+      - label: Members
+        name: members
+        widget: list
+        fields:
+          - { name: name, label: Name }
+          - { name: role, label: Role }
+          - { name: email, label: Email, required: false }
+          - { name: photo, label: Photo, widget: image, required: false }
+
+  - name: "events_alumni"
+    label: "Events – Alumni"
+    folder: "content/events/alumni"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    fields:
+      - { name: title, label: Title }
+      - { name: date, label: Date, widget: datetime, time_format: false }
+      - { name: description, label: Description, widget: text }
+      - { name: location, label: Location }
+      - { name: photo, label: Photo, widget: image, required: false }
+
+  - name: "events_community"
+    label: "Events – Community Service"
+    folder: "content/events/community-service"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    fields:
+      - { name: title, label: Title }
+      - { name: date, label: Date, widget: datetime, time_format: false }
+      - { name: description, label: Description, widget: text }
+      - { name: location, label: Location }
+      - { name: photo, label: Photo, widget: image, required: false }
+
+  - name: "events_philanthropy"
+    label: "Events – Philanthropy"
+    folder: "content/events/philanthropy"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    fields: &event_fields
+      - { name: title, label: Title }
+      - { name: date, label: Date, widget: datetime, time_format: false }
+      - { name: description, label: Description, widget: text }
+      - { name: location, label: Location }
+      - { name: photo, label: Photo, widget: image, required: false }
+
+  - name: "events_social"
+    label: "Events – Social"
+    folder: "content/events/social"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    fields: *event_fields
+
+  - name: "events_brotherhood"
+    label: "Events – Brotherhood"
+    folder: "content/events/brotherhood"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    fields: *event_fields
+
+  - name: "events_academic"
+    label: "Events – Academic"
+    folder: "content/events/academic"
+    create: true
+    slug: "{{slug}}"
+    extension: "json"
+    fields: *event_fields
+
+  - name: "gallery"
+    label: "Gallery"
+    folder: "content/gallery"
+    create: true
+    extension: "json"
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title }
+      - { name: description, label: Description, widget: text, required: false }
+      - { name: photo, label: Photo, widget: image }
