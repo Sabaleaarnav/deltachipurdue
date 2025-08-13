@@ -31,3 +31,26 @@
 </script>
 <script src="assets/js/app.js" defer></script>
 </body></html>
+<script>
+(async function(){
+  const grid = document.getElementById('galleryGrid');
+  try{
+    const res = await fetch('content/gallery/index.json',{cache:'no-store'});
+    const idx = await res.json();
+    const items = idx.items || [];
+    if(!items.length){
+      grid.innerHTML = '<p class="muted" style="text-align:center">No photos yet.</p>';
+      return;
+    }
+    grid.innerHTML = items.map(i => `
+      <div class="gallery-item">
+        ${i.photo ? `<img src="${i.photo}" alt="${i.title}" loading="lazy">` : ''}
+        <div class="meta"><h4>${i.title}</h4><p>${i.description || ''}</p></div>
+      </div>
+    `).join('');
+  } catch {
+    grid.innerHTML = '<p class="muted" style="text-align:center">No photos yet.</p>';
+  }
+})();
+</script>
+
