@@ -1,0 +1,11 @@
+{
+  "goals": [
+    {
+      "slug": "nashville-2026",
+      "title": "Spring Nashville Trip",
+      "goal_amount": 5000,
+      "current_amount": 0,
+      "source": "manual"
+    }
+  ]
+}
