@@ -137,4 +137,15 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica
   .leader-lg{grid-template-columns:90px 1fr}
   .leader-lg img{width:80px;height:80px}
 }
+.values{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(300px,1fr));
+  gap:1.25rem;
+}
+.value{padding:1.25rem 1.35rem}
+.value .icon{width:48px;height:48px;font-size:1.15rem}
+@media (max-width:780px){
+  .values{grid-template-columns:1fr}
+}
+
 
