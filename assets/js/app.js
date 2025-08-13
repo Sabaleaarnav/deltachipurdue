@@ -199,6 +199,46 @@ if (page === 'events') {
   })();
 }
 
+// INITIATIVES (Programs) — simple list per category
+if (page === 'initiatives') {
+  const cats = ['brotherhood','community-service','philanthropy','fundraising'];
+  const tabs = $('#initTabs');
+  const out  = $('#initList');
+
+  (async ()=>{
+    let data = {};
+    try {
+      const res = await fetch('content/initiatives.json', {cache:'no-store'});
+      data = await res.json();
+    } catch { data = {}; }
+
+    function draw(cat){
+      const items = Array.isArray(data[cat]) ? data[cat] : [];
+      if(!items.length){ out.innerHTML = `<p class="muted" style="text-align:center">No items yet.</p>`; return; }
+      out.innerHTML = items.map(i=>`
+        <article class="card">
+          <h3>${i.title||''}</h3>
+          <p>${i.description||''}</p>
+        </article>`).join('');
+    }
+
+    // build tabs
+    if(tabs){
+      tabs.innerHTML = cats.map((c,i)=>`<button class="tab-btn ${i===0?'active':''}" data-k="${c}">
+        ${c.replace('-',' ').replace(/\b\w/g,s=>s.toUpperCase())}
+      </button>`).join('');
+      $$('#initTabs .tab-btn').forEach(b=>{
+        b.addEventListener('click', ()=>{
+          $$('#initTabs .tab-btn').forEach(x=>x.classList.remove('active'));
+          b.classList.add('active');
+          draw(b.dataset.k);
+        });
+      });
+    }
+    draw(cats[0]);
+  })();
+}
+
 
 
   // ALUMNI: RSVP + ICS

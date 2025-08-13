@@ -1,0 +1,14 @@
+{
+  "brotherhood": [
+    { "title": "Retreat & Bonding", "description": "Retreats, team-building, and brotherhood programming." }
+  ],
+  "community-service": [
+    { "title": "Detrash the Wabash", "description": "River clean-ups, campus service, and partnerships with local nonprofits." }
+  ],
+  "philanthropy": [
+    { "title": "V Foundation", "description": "Fundraising to support cancer research and awareness." }
+  ],
+  "fundraising": [
+    { "title": "Nashville Trip Goal", "description": "Raising funds toward our $5,000 chapter trip target." }
+  ]
+}
