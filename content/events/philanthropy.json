@@ -1,1 +1,11 @@
-{ "items": [] }
+{
+  "items": [
+    {
+      "title": "V Foundation: Fall Push",
+      "date": "2025-11-08",
+      "location": "Campus / Online",
+      "description": "Raising funds and awareness for cancer research through the V Foundation.",
+      "photo": "/assets/images/v-foundation/cover.jpg"
+    }
+  ]
+}
