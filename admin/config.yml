@@ -6,22 +6,19 @@ media_folder: "assets/images"
 public_folder: "/assets/images"
 
 collections:
-  # --- Leadership (single JSON file) ---
   - name: "leadership"
     label: "Leadership"
-    files:
-      - name: "leadership"
-        label: "Leadership"
-        file: "content/leadership.json"
+    file: "content/leadership.json"
+    fields:
+      - label: "Members"
+        name: "members"
+        widget: list
         fields:
-          - label: "Members"
-            name: "members"
-            widget: list
-            fields:
-              - { label: "Name",  name: "name",  widget: "string" }
-              - { label: "Role",  name: "role",  widget: "string" }
-              - { label: "Email", name: "email", widget: "string", required: false }
-              - { label: "Photo", name: "photo", widget: "image", required: false }
+          - { label: "Name",  name: "name",  widget: "string" }
+          - { label: "Role",  name: "role",  widget: "string" }
+          - { label: "Email", name: "email", widget: "string", required: false }
+          - { label: "Photo", name: "photo", widget: "image", required: false }
+
 
   # --- Site Settings (single JSON file) ---
   - name: "settings"
