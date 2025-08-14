@@ -6,6 +6,7 @@ media_folder: "assets/images"
 public_folder: "/assets/images"
 
 collections:
+  # --- Leadership (single JSON file) ---
   - name: "leadership"
     label: "Leadership"
     files:
@@ -20,8 +21,9 @@ collections:
               - { label: "Name",  name: "name",  widget: "string" }
               - { label: "Role",  name: "role",  widget: "string" }
               - { label: "Email", name: "email", widget: "string", required: false }
-              - { label: "Photo (URL)", name: "photo", widget: "string", required: false }
+              - { label: "Photo", name: "photo", widget: "image",  required: false }
 
+  # --- Site Settings (single JSON file) ---
   - name: "settings"
     label: "Site Settings"
     files:
@@ -52,6 +54,7 @@ collections:
                 fields:
                   - { label: "RSVP URL", name: "rsvp_url", widget: "string", required: false }
 
+  # --- Fundraising Goals (single JSON file) ---
   - name: "goals"
     label: "Fundraising Goals"
     files:
@@ -63,10 +66,11 @@ collections:
             name: "goals"
             widget: list
             fields:
-              - { label: "Title",          name: "title",           widget: "string" }
-              - { label: "Goal Amount",    name: "goal_amount",     widget: "number" }
-              - { label: "Current Amount", name: "current_amount",  widget: "number" }
+              - { label: "Title",          name: "title",          widget: "string" }
+              - { label: "Goal Amount",    name: "goal_amount",    widget: "number" }
+              - { label: "Current Amount", name: "current_amount", widget: "number" }
 
+  # --- Donor Wall (single JSON file) ---
   - name: "donors"
     label: "Donor Wall"
     files:
