@@ -8,19 +8,20 @@ public_folder: "/assets/images"
 collections:
   - name: "leadership"
     label: "Leadership"
-    file: "content/leadership.json"
-    fields:
-      - label: "Members"
-        name: "members"
-        widget: list
+    files:
+      - name: "leadership"
+        label: "Leadership"
+        file: "content/leadership.json"
         fields:
-          - { label: "Name",  name: "name",  widget: "string" }
-          - { label: "Role",  name: "role",  widget: "string" }
-          - { label: "Email", name: "email", widget: "string", required: false }
-          - { label: "Photo", name: "photo", widget: "image", required: false }
+          - label: "Members"
+            name: "members"
+            widget: list
+            fields:
+              - { label: "Name",  name: "name",  widget: "string" }
+              - { label: "Role",  name: "role",  widget: "string" }
+              - { label: "Email", name: "email", widget: "string", required: false }
+              - { label: "Photo (URL)", name: "photo", widget: "string", required: false }
 
-
-  # --- Site Settings (single JSON file) ---
   - name: "settings"
     label: "Site Settings"
     files:
@@ -38,7 +39,7 @@ collections:
             name: "forms"
             widget: object
             fields:
-              - { label: "Mode",               name: "mode",            widget: "select", options: ["netlify","formspree","disabled"], default: "netlify" }
+              - { label: "Mode",                 name: "mode",            widget: "select", options: ["netlify","formspree","disabled"], default: "netlify" }
               - { label: "Alumni Form Endpoint", name: "alumni_endpoint", widget: "string", required: false }
               - { label: "Family Form Endpoint", name: "family_endpoint", widget: "string", required: false }
           - label: "Alumni"
@@ -51,36 +52,34 @@ collections:
                 fields:
                   - { label: "RSVP URL", name: "rsvp_url", widget: "string", required: false }
 
-  # --- Goals (single JSON file) ---
   - name: "goals"
     label: "Fundraising Goals"
     files:
       - name: "goals"
-        label: "Goals"
+        label: "Fundraising Goals"
         file: "content/goals.json"
         fields:
           - label: "Goals"
             name: "goals"
             widget: list
             fields:
-              - { label: "Title",           name: "title",           widget: "string" }
-              - { label: "Goal Amount",     name: "goal_amount",     widget: "number" }
-              - { label: "Current Amount",  name: "current_amount",  widget: "number" }
+              - { label: "Title",          name: "title",           widget: "string" }
+              - { label: "Goal Amount",    name: "goal_amount",     widget: "number" }
+              - { label: "Current Amount", name: "current_amount",  widget: "number" }
 
-  # --- Donor Wall (single JSON file) ---
   - name: "donors"
     label: "Donor Wall"
     files:
       - name: "donors"
-        label: "Donors"
+        label: "Donor Wall"
         file: "content/donors.json"
         fields:
           - label: "Donors"
             name: "donors"
             widget: list
             fields:
-              - { label: "Name",                name: "name",        widget: "string", required: false }
-              - { label: "Type",                name: "type",        widget: "select", options: ["alumni","family"], default: "alumni" }
-              - { label: "Class Year (alumni)", name: "class_year",  widget: "string", required: false }
-              - { label: "Related To (family)", name: "related_to",  widget: "string", required: false }
-              - { label: "Message",             name: "message",     widget: "text",   required: false }
+              - { label: "Name",                 name: "name",       widget: "string", required: false }
+              - { label: "Type",                 name: "type",       widget: "select", options: ["alumni","family"], default: "alumni" }
+              - { label: "Class Year (alumni)",  name: "class_year", widget: "string", required: false }
+              - { label: "Related To (family)",  name: "related_to", widget: "string", required: false }
+              - { label: "Message",              name: "message",    widget: "text",   required: false }
