@@ -130,53 +130,64 @@ if (page === 'leadership') {
 
 
 
-  // EVENTS (+ filters) — flat JSON per category
-if (page === 'events') {
-  const categories = ['alumni','brotherhood','community-service','philanthropy','fundraising'];
-  let all = [];
+  // EVENTS (+ filters)
+if(page==='events'){
+  // combined philanthropy+fundraising under "philanthropy"
+  const categories = ['brotherhood','community-service','philanthropy'];
 
-  async function loadCategory(cat){
-    try{
-      const res = await fetch(`content/events/${cat}.json`, {cache:'no-store'});
-      if(!res.ok) return [];
-      const data = await res.json();
-      const items = Array.isArray(data.items) ? data.items : [];
-      // attach category to each item
-      return items.map(it => ({...it, category: cat}));
-    }catch{ return []; }
+  let allEvents = [];
+  for (const cat of categories){
+    try {
+      const data = await loadJSON(`content/events/${cat}.json`);
+      const list = data.items || data.events || [];
+      allEvents.push(...list.map(ev => ({...ev, category: cat})));
+    } catch {}
+  }
+  allEvents.sort((a,b)=> new Date(a.date) - new Date(b.date));
+
+  const filters = $('#eventFilters');
+  const listEl  = $('#eventsList');
+
+  function draw(list){
+    if(!listEl) return;
+    if(!list.length){
+      listEl.innerHTML = `<p class="muted" style="text-align:center">No events yet.</p>`;
+      return;
+    }
+    listEl.innerHTML = list.map(ev=>{
+      const thumb = ev.photo
+        ? `<img class="thumb" src="${ev.photo}" alt="${ev.title}" loading="lazy"/>`
+        : `<div class="thumb" aria-hidden="true"></div>`;
+      const badge = `<span class="badge">${ev.category.replace('-',' ').toUpperCase()}</span>`;
+      return `
+        <article class="event">
+          ${thumb}
+          <div class="date">${fmtDate(ev.date)}</div>
+          <h3>${ev.title}</h3>
+          <div>${badge}</div>
+          <p>${ev.description||''}</p>
+          <div><strong>Location:</strong> ${ev.location||'TBA'}</div>
+        </article>`;
+    }).join('');
   }
 
-  (async ()=>{
-    const batches = await Promise.all(categories.map(loadCategory));
-    all = batches.flat();
-    // sort by date (ascending)
-    all.sort((a,b)=> new Date(a.date||'2100-01-01') - new Date(b.date||'2100-01-01'));
+  if(filters){
+    filters.innerHTML = ['all',...categories]
+      .map(c=>`<button class="filter-chip ${c==='all'?'active':''}" data-cat="${c}">
+        ${c.replace('-',' ').replace(/\b\w/g,s=>s.toUpperCase())}
+      </button>`).join('');
 
-    const filters = $('#eventFilters');
-    const listEl  = $('#eventsList');
-
-    function draw(list){
-      if(!listEl) return;
-      if(!list.length){
-        listEl.innerHTML = `<p class="muted" style="text-align:center">No events yet.</p>`;
-        return;
-      }
-      listEl.innerHTML = list.map(ev=>{
-        const thumb = ev.photo ? `<img class="thumb" src="${ev.photo}" alt="${ev.title||''}" loading="lazy"/>`
-                               : `<div class="thumb" aria-hidden="true"></div>`;
-        const badge = `<span class="badge">${ev.category.replace('-',' ').toUpperCase()}</span>`;
-        const dstr  = ev.date ? fmtDate(ev.date) : 'TBA';
-        return `
-          <article class="event">
-            ${thumb}
-            <div class="date">${dstr}</div>
-            <h3>${ev.title||''}</h3>
-            <div>${badge}</div>
-            ${ev.description?`<p>${ev.description}</p>`:''}
-            <div><strong>Location:</strong> ${ev.location||'TBA'}</div>
-          </article>`;
-      }).join('');
-    }
+    $$('#eventFilters .filter-chip').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        $$('#eventFilters .filter-chip').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+        const cat = b.dataset.cat;
+        draw(cat==='all' ? allEvents : allEvents.filter(e=>e.category===cat));
+      });
+    });
+  }
+  draw(allEvents);
+}
 
     // build filter chips
     if(filters){
