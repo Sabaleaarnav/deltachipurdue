@@ -1,1 +1,11 @@
-{ "items": [] }
+{
+  "items": [
+    {
+      "title": "Detrash the Wabash",
+      "date": "2024-10-12",
+      "location": "Wabash River Trail",
+      "description": "Chapter cleanup along the Wabash—bags full, spirits high.",
+      "photo": "/assets/images/detrash/cover.jpg"
+    }
+  ]
+}
