@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ΔΧ Purdue – Home</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <!-- Netlify Identity (needed so confirm links can finish) -->
+  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', (user) => {
+        // after confirm, user is null until they log in;
+        // when they do, send them to the CMS
+        window.netlifyIdentity.on('login', () => {
+          window.location.href = '/admin/';
+        });
+      });
+    }
+  </script>
 </head>
 <body data-page="home">
   <header id="site-header"></header>
