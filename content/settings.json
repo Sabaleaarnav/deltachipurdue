@@ -1,16 +1,18 @@
 {
   "donate": {
-    "url": "https://YOUR_ALUMNI_DONATION_LINK",
+    "url": "na",
     "url_family": "https://YOUR_FAMILY_DONATION_LINK",
     "blurb": "All gifts support chapter programming, service projects, and scholarship."
   },
   "forms": {
     "mode": "netlify"
   },
-  "goals": { "use_function": false },
+  "goals": {
+    "use_function": false
+  },
   "alumni": {
     "homecoming2025": {
-      "rsvp_url": "https://forms.gle/YOUR_GOOGLE_FORM_ID"
+      "rsvp_url": "https://forms.gle/qf1HPV7X4FToMmab8"
     }
   }
 }
