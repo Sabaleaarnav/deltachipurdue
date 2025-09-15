@@ -11,6 +11,11 @@
       "goal_amount": 5000,
       "current_amount": 0,
       "source": "manual"
+    },
+    {
+      "title": "Basketball Court Renovation",
+      "goal_amount": 10000,
+      "current_amount": -24
     }
   ]
 }
