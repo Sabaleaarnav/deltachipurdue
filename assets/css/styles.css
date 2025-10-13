@@ -6,7 +6,7 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--ink);background:var(--bg);line-height:1.65}
-.no-scroll{overflow:hidden}
+.no-scroll{overflow:hidden;height:100vh}
 .container{max-width:1100px;margin:0 auto;padding:0 1.1rem}
 
 /* Header / Nav */
@@ -17,17 +17,60 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica
 .nav-link{text-decoration:none;color:var(--ink);padding:.4rem .2rem;border-radius:.3rem}
 .nav-link:hover,.nav-link.active{color:var(--maroon)}
 .admin-link{margin-left:.5rem;text-decoration:none;background:var(--maroon);color:#fff;padding:.45rem .7rem;border-radius:.5rem;box-shadow:var(--shadow);white-space:nowrap}
-.nav-toggle{display:none;border:0;background:transparent;font-size:1.5rem;margin-left:auto}
+.nav-toggle{
+  display:none;
+  border:0;
+  background:rgba(139,0,0,.08);
+  color:var(--maroon);
+  font-size:1.45rem;
+  margin-left:auto;
+  width:44px;
+  height:44px;
+  border-radius:.65rem;
+  align-items:center;
+  justify-content:center;
+  line-height:1;
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease;
+}
+.nav-toggle:hover{background:rgba(139,0,0,.14)}
+.nav-toggle:focus-visible{outline:2px solid var(--maroon);outline-offset:3px}
+.nav-toggle[aria-expanded="true"]{background:var(--maroon);color:#fff}
 
 /* Mobile drawer */
-.mobile-drawer{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none}
-.mobile-drawer.open{display:block}
-.drawer-inner{position:absolute;right:0;top:0;height:100%;width:min(80vw,320px);background:#fff;padding:1rem;display:flex;flex-direction:column;gap:.4rem;box-shadow:var(--shadow)}
+.mobile-drawer{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.35);
+  display:flex;
+  justify-content:flex-end;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .2s ease;
+  padding-top:0;
+  padding-top:env(safe-area-inset-top,0);
+  pointer-events:none;
+}
+.mobile-drawer.open{opacity:1;visibility:visible;pointer-events:auto}
+.drawer-inner{
+  height:100%;
+  width:min(80vw,320px);
+  background:#fff;
+  padding:1rem;
+  padding:calc(1rem + env(safe-area-inset-top,0)) 1rem 1rem;
+  display:flex;
+  flex-direction:column;
+  gap:.4rem;
+  box-shadow:var(--shadow);
+  transform:translateX(16px);
+  transition:transform .24s ease;
+}
+.mobile-drawer.open .drawer-inner{transform:translateX(0)}
 .drawer-link{display:block;padding:.8rem 1rem;border-radius:.6rem;text-decoration:none;color:var(--ink)}
 .drawer-link.active,.drawer-link:hover{background:var(--panel);color:var(--maroon)}
 
 @media (max-width:950px){
-  .nav-toggle{display:block}
+  .nav-toggle{display:inline-flex}
   .nav-menu{display:none}
   .admin-link{display:none}
 }
@@ -48,9 +91,32 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica
 .btn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
 .btn-gold{background:var(--gold);border-color:var(--gold);color:#231a00}
 .btn-outline{background:transparent;color:#fff;border-color:#fff}
-.hero-grid{height:48vh;border-radius:1rem;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.hero-tile{background:linear-gradient(135deg,#ffffff22,#00000011);border:1px solid #ffffff22;border-radius:.5rem}
-.hero-tile img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-auto-rows:1fr;
+  gap:4px;
+  padding:4px;
+  border-radius:1rem;
+  background:linear-gradient(135deg,#ffffff1f,#00000018);
+  height:clamp(260px,45vw,420px);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.hero-tile{
+  position:relative;
+  border-radius:.7rem;
+  overflow:hidden;
+  background:linear-gradient(135deg,#ffffff22,#00000011);
+}
+.hero-tile img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 
 /* Cards / grids */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
@@ -105,8 +171,15 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica
 
 @media (max-width:900px){
   .hero-inner{grid-template-columns:1fr}
-  .hero-grid{height:36vh}
+  .hero-grid{height:clamp(220px,60vw,360px)}
   .grid-2{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .hero-grid{
+    height:clamp(220px,70vw,320px);
+    gap:3px;
+    padding:3px;
+  }
 }
 /* Home values */
 /* About values grid: always 2-up on desktop */
