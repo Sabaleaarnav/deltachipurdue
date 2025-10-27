@@ -87,3 +87,148 @@ collections:
               - { label: "Class Year (alumni)",  name: "class_year", widget: "string", required: false }
               - { label: "Related To (family)",  name: "related_to", widget: "string", required: false }
               - { label: "Message",              name: "message",    widget: "text",   required: false }
+
+  # --- Events (by category) ---
+  - name: "events"
+    label: "Events"
+    files:
+      - name: "alumni"
+        label: "Alumni Events"
+        file: "content/events/alumni.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Date",        name: "date",        widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo",       name: "photo",       widget: "image", required: false }
+      - name: "brotherhood"
+        label: "Brotherhood Events"
+        file: "content/events/brotherhood.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Date",        name: "date",        widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo",       name: "photo",       widget: "image", required: false }
+      - name: "community-service"
+        label: "Community Service Events"
+        file: "content/events/community-service.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Date",        name: "date",        widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo",       name: "photo",       widget: "image", required: false }
+      - name: "philanthropy"
+        label: "Philanthropy Events"
+        file: "content/events/philanthropy.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Date",        name: "date",        widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo",       name: "photo",       widget: "image", required: false }
+      - name: "social"
+        label: "Social Events"
+        file: "content/events/social.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Date",        name: "date",        widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo",       name: "photo",       widget: "image", required: false }
+      - name: "fundraising"
+        label: "Fundraising Events"
+        file: "content/events/fundraising.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Date",        name: "date",        widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo",       name: "photo",       widget: "image", required: false }
+      - name: "academic"
+        label: "Academic Events"
+        file: "content/events/academic.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Date",        name: "date",        widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location",    name: "location",    widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo",       name: "photo",       widget: "image", required: false }
+
+  # --- Gallery ---
+  - name: "gallery"
+    label: "Gallery"
+    files:
+      - name: "gallery"
+        label: "Gallery"
+        file: "content/gallery/index.json"
+        fields:
+          - label: "Gallery Items"
+            name: "items"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo",       name: "photo",       widget: "image" }
+
+  # --- Initiatives ---
+  - name: "initiatives"
+    label: "Initiatives"
+    files:
+      - name: "initiatives"
+        label: "Initiatives"
+        file: "content/initiatives.json"
+        fields:
+          - label: "Brotherhood"
+            name: "brotherhood"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Community Service"
+            name: "community-service"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Philanthropy"
+            name: "philanthropy"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Fundraising"
+            name: "fundraising"
+            widget: list
+            fields:
+              - { label: "Title",       name: "title",       widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
