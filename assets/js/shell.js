@@ -13,17 +13,17 @@
     <div class="site-header">
       <div class="container nav">
         <a class="logo" href="index.html">ΔΧ Purdue</a>
-        <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+        <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">☰</button>
         <ul class="nav-menu">
           ${nav.map(n=>`<li><a class="nav-link ${page===n.id?'active':''}" href="${n.href}">${n.label}</a></li>`).join('')}
         </ul>
         <a class="admin-link" href="admin/">Admin Login</a>
       </div>
-      <div class="mobile-drawer" aria-hidden="true">
-        <div class="drawer-inner">
+      <div class="mobile-drawer" id="mobileNav" aria-hidden="true">
+        <nav class="drawer-inner" aria-label="Primary navigation">
           ${nav.map(n=>`<a class="drawer-link ${page===n.id?'active':''}" href="${n.href}">${n.label}</a>`).join('')}
           <a class="drawer-link" href="admin/">Admin Login</a>
-        </div>
+        </nav>
       </div>
     </div>
   `;
@@ -44,18 +44,58 @@
 
   const toggle = document.querySelector('.nav-toggle');
   const drawer = document.querySelector('.mobile-drawer');
+  const firstDrawerLink = () => drawer ? drawer.querySelector('.drawer-link') : null;
   if (toggle && drawer){
+    const closeDrawer = (returnFocus=true)=>{
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden','true');
+      toggle.setAttribute('aria-expanded','false');
+      toggle.setAttribute('aria-label','Open menu');
+      document.body.classList.remove('no-scroll');
+      if(returnFocus){
+        try{ toggle.focus({preventScroll:true}); }
+        catch(e){ toggle.focus(); }
+      }
+    };
+    const openDrawer = ()=>{
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden','false');
+      toggle.setAttribute('aria-expanded','true');
+      toggle.setAttribute('aria-label','Close menu');
+      document.body.classList.add('no-scroll');
+      const first = firstDrawerLink();
+      if(first){
+        try{ first.focus({preventScroll:true}); }
+        catch(e){ first.focus(); }
+      }
+    };
+
     toggle.addEventListener('click', ()=>{
-      const open = drawer.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open ? 'true':'false');
-      document.body.classList.toggle('no-scroll', open);
+      if(drawer.classList.contains('open')) closeDrawer();
+      else openDrawer();
     });
+
     drawer.addEventListener('click', (e)=>{
-      if(e.target.classList.contains('mobile-drawer')){
-        drawer.classList.remove('open');
-        toggle.setAttribute('aria-expanded','false');
-        document.body.classList.remove('no-scroll');
+      if(e.target.classList.contains('mobile-drawer')) closeDrawer();
+      const link = e.target.closest('.drawer-link');
+      if(link){
+        closeDrawer(false);
       }
     });
+
+    window.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape') closeDrawer();
+    });
+
+    const mq = typeof window.matchMedia === 'function'
+      ? window.matchMedia('(min-width: 951px)')
+      : null;
+    if(mq){
+      if(typeof mq.addEventListener === 'function'){
+        mq.addEventListener('change', (evt)=>{ if(evt.matches) closeDrawer(false); });
+      } else if(typeof mq.addListener === 'function'){
+        mq.addListener((evt)=>{ if(evt.matches) closeDrawer(false); });
+      }
+    }
   }
 })();
