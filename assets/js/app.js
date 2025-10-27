@@ -132,7 +132,7 @@ if (page === 'leadership') {
 
   // EVENTS (+ filters) — flat JSON per category
 if (page === 'events') {
-  const categories = ['alumni','brotherhood','community-service','philanthropy','fundraising'];
+  const categories = ['alumni','brotherhood','community-service','philanthropy','social','fundraising','academic'];
   let all = [];
 
   async function loadCategory(cat){

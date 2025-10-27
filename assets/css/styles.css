@@ -62,7 +62,7 @@ body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica
 .filter-chip{border:1px solid var(--border);padding:.35rem .7rem;border-radius:999px;background:#fff;cursor:pointer}
 .filter-chip.active{background:var(--maroon);border-color:var(--maroon);color:#fff}
 .events-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
-.event{border-left:4px solid var(--gold);background:#fff;border:1px solid var(--border);border-radius:.8rem;padding:1rem;display:flex;flex-direction:column;gap:.5rem}
+.event{background:#fff;border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:.8rem;padding:1rem;display:flex;flex-direction:column;gap:.5rem}
 .event .thumb{width:100%;aspect-ratio:16/9;border-radius:.5rem;object-fit:cover;background:#eee}
 .event .date{color:var(--maroon);font-weight:600}
 .event .badge{display:inline-block;background:var(--maroon);color:#fff;padding:.2rem .5rem;border-radius:999px;font-size:.75rem}

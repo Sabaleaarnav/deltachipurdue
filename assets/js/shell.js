@@ -2,7 +2,7 @@
   const page = document.body.dataset.page || "";
   const nav = [
     { id:"home",       href:"index.html",       label:"Home" },
-    { id:"initiatives",href:"initiatives.html",    label:"Initiatives" },  // renamed
+    { id:"initiatives",href:"initiatives.html", label:"Initiatives" },
     { id:"leadership", href:"leadership.html",  label:"Leadership" },
     { id:"events",     href:"events.html",      label:"Events" },
     { id:"gallery",    href:"gallery.html",     label:"Gallery" },
