@@ -1,0 +1,328 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+slug:
+  encoding: "ascii"
+  clean_accents: true
+
+collections:
+  # ============================================
+  # SITE SETTINGS
+  # ============================================
+  - name: "settings"
+    label: "⚙️ Site Settings"
+    files:
+      - name: "settings"
+        label: "General Settings"
+        file: "content/settings.json"
+        fields:
+          - label: "Donation Links"
+            name: "donate"
+            widget: "object"
+            collapsed: false
+            fields:
+              - { label: "Alumni Donation URL", name: "url", widget: "string", hint: "OmegaFi or Zeffy link for alumni" }
+              - { label: "Family/Friends Donation URL", name: "url_family", widget: "string", hint: "Separate link for non-alumni" }
+              - { label: "Donation Page Description", name: "blurb", widget: "text", required: false }
+          - label: "Form Settings"
+            name: "forms"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Form Mode", name: "mode", widget: "select", options: ["netlify", "formspree", "disabled"], default: "netlify" }
+          - label: "Alumni Events"
+            name: "alumni"
+            widget: "object"
+            collapsed: true
+            fields:
+              - label: "Homecoming 2025"
+                name: "homecoming2025"
+                widget: "object"
+                fields:
+                  - { label: "RSVP URL", name: "rsvp_url", widget: "string", required: false }
+
+  # ============================================
+  # LEADERSHIP
+  # ============================================
+  - name: "leadership"
+    label: "👥 Leadership"
+    files:
+      - name: "leadership"
+        label: "Executive Board & Officers"
+        file: "content/leadership.json"
+        fields:
+          - label: "Members"
+            name: "members"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.role}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Role/Position", name: "role", widget: "string", hint: "e.g., President, Vice President, Recruitment Chair" }
+              - { label: "Email", name: "email", widget: "string", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false, hint: "Square headshot works best" }
+
+  # ============================================
+  # EVENTS
+  # ============================================
+  - name: "events"
+    label: "📅 Events"
+    files:
+      - name: "alumni-events"
+        label: "Alumni Events"
+        file: "content/events/alumni.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+
+      - name: "brotherhood-events"
+        label: "Brotherhood Events"
+        file: "content/events/brotherhood.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+
+      - name: "community-service-events"
+        label: "Community Service Events"
+        file: "content/events/community-service.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+
+      - name: "philanthropy-events"
+        label: "Philanthropy Events"
+        file: "content/events/philanthropy.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+
+      - name: "social-events"
+        label: "Social Events"
+        file: "content/events/social.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+
+      - name: "fundraising-events"
+        label: "Fundraising Events"
+        file: "content/events/fundraising.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+
+      - name: "academic-events"
+        label: "Academic Events"
+        file: "content/events/academic.json"
+        fields:
+          - label: "Events"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+
+  # ============================================
+  # GALLERY
+  # ============================================
+  - name: "gallery"
+    label: "📸 Photo Gallery"
+    files:
+      - name: "gallery"
+        label: "Gallery Photos"
+        file: "content/gallery/index.json"
+        fields:
+          - label: "Photos"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text", required: false }
+              - { label: "Event/Category", name: "event", widget: "string", required: false }
+
+  # ============================================
+  # FUNDRAISING
+  # ============================================
+  - name: "fundraising"
+    label: "💰 Fundraising"
+    files:
+      - name: "goals"
+        label: "Fundraising Goals"
+        file: "content/goals.json"
+        fields:
+          - label: "Goals"
+            name: "goals"
+            widget: "list"
+            summary: "{{fields.title}} — ${{fields.current_amount}}/${{fields.goal_amount}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Goal Amount ($)", name: "goal_amount", widget: "number", value_type: "int" }
+              - { label: "Current Amount ($)", name: "current_amount", widget: "number", value_type: "int", default: 0 }
+
+      - name: "donors"
+        label: "Donor Wall"
+        file: "content/donors.json"
+        fields:
+          - label: "Donors"
+            name: "donors"
+            widget: "list"
+            summary: "{{fields.name}} ({{fields.type}})"
+            fields:
+              - { label: "Name", name: "name", widget: "string", required: false, hint: "Leave blank for anonymous" }
+              - { label: "Type", name: "type", widget: "select", options: ["alumni", "family"], default: "alumni" }
+              - { label: "Class Year (Alumni)", name: "class_year", widget: "string", required: false }
+              - { label: "Related To (Family)", name: "related_to", widget: "string", required: false }
+              - { label: "Message", name: "message", widget: "text", required: false }
+
+  # ============================================
+  # INITIATIVES
+  # ============================================
+  - name: "initiatives"
+    label: "🎯 Initiatives"
+    files:
+      - name: "initiatives"
+        label: "Programs & Initiatives"
+        file: "content/initiatives.json"
+        fields:
+          - label: "Brotherhood Programs"
+            name: "brotherhood"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Community Service Programs"
+            name: "community-service"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Philanthropy Programs"
+            name: "philanthropy"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Fundraising Programs"
+            name: "fundraising"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
+  # ============================================
+  # ALUMNI SPOTLIGHTS
+  # ============================================
+  - name: "alumni-spotlights"
+    label: "⭐ Alumni Spotlights"
+    files:
+      - name: "spotlights"
+        label: "Featured Alumni"
+        file: "content/alumni-spotlights.json"
+        fields:
+          - label: "Spotlights"
+            name: "spotlights"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.company}}"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Class Year", name: "class_year", widget: "string", required: false }
+              - { label: "Current Title", name: "title", widget: "string" }
+              - { label: "Company", name: "company", widget: "string" }
+              - { label: "Quote", name: "quote", widget: "text", hint: "Their testimonial about Delta Chi" }
+              - { label: "Photo", name: "photo", widget: "image", required: false }
+
+  # ============================================
+  # CAREER OUTCOMES
+  # ============================================
+  - name: "careers"
+    label: "💼 Career Outcomes"
+    files:
+      - name: "careers"
+        label: "Internship & Job Placements"
+        file: "content/careers.json"
+        fields:
+          - label: "Placements"
+            name: "placements"
+            widget: "list"
+            summary: "{{fields.company}} — {{fields.role}} ({{fields.year}})"
+            fields:
+              - { label: "Company", name: "company", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Year", name: "year", widget: "string" }
+              - { label: "Company Logo", name: "logo", widget: "image", required: false }
+
+  # ============================================
+  # NEWSLETTERS
+  # ============================================
+  - name: "newsletters"
+    label: "📰 Newsletters"
+    files:
+      - name: "newsletters"
+        label: "Newsletter Archive"
+        file: "content/newsletters.json"
+        fields:
+          - label: "Newsletters"
+            name: "newsletters"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+              - { label: "URL", name: "url", widget: "string", hint: "Link to newsletter (Buttondown, PDF, etc.)" }
+              - { label: "Summary", name: "summary", widget: "text", required: false }

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Delta Chi Fraternity at Purdue University. Building men of character since 1927. Reestablished Fall 2024.">
+  <meta name="theme-color" content="#8B0000">
+  
+  <title>Delta Chi Purdue — Building Men of Character</title>
+  
+  <link rel="stylesheet" href="assets/css/styles.css">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://identity.netlify.com">
+  
+  <!-- Netlify Identity -->
+  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', (user) => {
+        window.netlifyIdentity.on('login', () => {
+          window.location.href = '/admin/';
+        });
+      });
+    }
+  </script>
+</head>
+<body data-page="home">
+  <header id="site-header" class="site-header"></header>
+  
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-bg">
+        <img src="assets/images/hero-bg.jpg" alt="" loading="eager" id="hero-image">
+      </div>
+      <div class="hero-content">
+        <span class="hero-overline fade-in">Reestablished Fall 2024</span>
+        <h1 class="hero-title fade-in stagger-1">Delta Chi</h1>
+        <p class="hero-subtitle fade-in stagger-2">Building men of character at Purdue University since 1927.</p>
+        
+        <div class="hero-stats fade-in stagger-3">
+          <div class="hero-stat">
+            <div class="hero-stat-value">55</div>
+            <div class="hero-stat-label">Brothers</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">1927</div>
+            <div class="hero-stat-label">Established</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">97</div>
+            <div class="hero-stat-label">Years of Legacy</div>
+          </div>
+        </div>
+        
+        <div class="hero-ctas fade-in stagger-4">
+          <a href="rush.html" class="btn btn-gold btn-lg">Rush ΔΧ</a>
+          <a href="alumni.html" class="btn btn-outline btn-lg">Alumni Connect</a>
+        </div>
+      </div>
+      
+      <div class="hero-scroll">
+        <div class="hero-scroll-icon"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+    
+    <!-- VALUES -->
+    <section class="section section-lg">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="overline">Our Foundation</span>
+          <h2 class="headline-lg">Four Pillars of Excellence</h2>
+          <p>The principles that guide every brother of Delta Chi.</p>
+        </div>
+        
+        <div class="grid grid-4">
+          <div class="value-card fade-in stagger-1">
+            <div class="value-icon">🤝</div>
+            <h3 class="value-title">Promote Friendship</h3>
+            <p class="value-text">We bring together men of similar interests and character to form bonds that last far beyond graduation.</p>
+          </div>
+          
+          <div class="value-card fade-in stagger-2">
+            <div class="value-icon">🧭</div>
+            <h3 class="value-title">Develop Character</h3>
+            <p class="value-text">Integrity, scholarship, and leadership define our members—on campus, at work, and in the community.</p>
+          </div>
+          
+          <div class="value-card fade-in stagger-3">
+            <div class="value-icon">⚖️</div>
+            <h3 class="value-title">Advance Justice</h3>
+            <p class="value-text">We do the right thing even when it's not popular—standing up for what's fair and respectful.</p>
+          </div>
+          
+          <div class="value-card fade-in stagger-4">
+            <div class="value-icon">🎓</div>
+            <h3 class="value-title">Sound Education</h3>
+            <p class="value-text">Study groups, mentoring, and scholarship support help every brother reach his full potential.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ALUMNI SPOTLIGHT -->
+    <section class="section section-gray" id="alumni-spotlight">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="overline">Alumni Impact</span>
+          <h2 class="headline-lg">Where Brotherhood Leads</h2>
+          <p>Hear from the brothers who've built careers and communities.</p>
+        </div>
+        
+        <div class="spotlight fade-in">
+          <div class="spotlight-content">
+            <blockquote class="spotlight-quote">
+              Delta Chi gave me more than a fraternity—it gave me a framework for leadership, lifelong friendships, and the confidence to pursue excellence in every aspect of my career.
+            </blockquote>
+            <div class="spotlight-author">
+              <img src="assets/images/placeholder-avatar.png" alt="John Hibler" class="spotlight-avatar">
+              <div>
+                <div class="spotlight-name">John Hibler</div>
+                <div class="spotlight-title">Plant Manager • Caterpillar Lafayette</div>
+              </div>
+            </div>
+          </div>
+          <div class="spotlight-image">
+            <img src="assets/images/spotlight-placeholder.jpg" alt="Delta Chi Alumni" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- CAREER OUTCOMES -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="overline">2026 Placements</span>
+          <h2 class="headline-lg">Where Brothers Intern</h2>
+          <p>Our network opens doors to leading companies.</p>
+        </div>
+        
+        <div class="careers-showcase" id="careers-grid">
+          <!-- Populated by JS -->
+          <p class="empty-state fade-in">Internship data coming soon. Check back for 2026 placements!</p>
+        </div>
+        
+        <div class="text-center mt-lg fade-in">
+          <a href="rush.html" class="link-btn">
+            See what joining ΔΧ can do for you 
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 3.5l4 4.5-4 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- INSTAGRAM PLACEHOLDER -->
+    <section class="section section-gray instagram-section">
+      <div class="container">
+        <div class="section-header fade-in">
+          <span class="overline">@deltachipurdue</span>
+          <h2 class="headline-lg">Life at ΔΧ</h2>
+          <p>Follow along on Instagram.</p>
+        </div>
+        
+        <div class="instagram-placeholder fade-in">
+          <div class="instagram-placeholder-item"></div>
+          <div class="instagram-placeholder-item"></div>
+          <div class="instagram-placeholder-item"></div>
+          <div class="instagram-placeholder-item"></div>
+        </div>
+        
+        <div class="text-center mt-lg fade-in">
+          <a href="https://instagram.com/deltachipurdue" target="_blank" rel="noopener" class="btn btn-outline-dark">
+            Follow @deltachipurdue
+          </a>
+        </div>
+      </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="section section-maroon">
+      <div class="container text-center">
+        <h2 class="headline-lg fade-in" style="color: var(--white);">Ready to Join?</h2>
+        <p class="fade-in stagger-1" style="color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto var(--space-lg);">
+          Discover what it means to be part of something bigger than yourself.
+        </p>
+        <div class="fade-in stagger-2">
+          <a href="rush.html" class="btn btn-gold btn-lg">Learn About Rush</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer id="site-footer" class="site-footer"></footer>
+  
+  <script src="assets/js/shell.js"></script>
+  <script src="assets/js/app.js" defer></script>
+</body>
+</html>

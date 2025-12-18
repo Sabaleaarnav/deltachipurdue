@@ -1,0 +1,20 @@
+{
+  "goals": [
+    {
+      "title": "International Convention 2026",
+      "goal_amount": 2500,
+      "current_amount": 0
+    },
+    {
+      "slug": "nashville-2026",
+      "title": "Spring Nashville Trip",
+      "goal_amount": 5000,
+      "current_amount": 0
+    },
+    {
+      "title": "Basketball Court Renovation",
+      "goal_amount": 10000,
+      "current_amount": 0
+    }
+  ]
+}

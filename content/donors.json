@@ -1,0 +1,16 @@
+{
+  "donors": [
+    {
+      "type": "alumni",
+      "name": "Sample Alum",
+      "class_year": "2015",
+      "message": "Proud to give back!"
+    },
+    {
+      "type": "family",
+      "name": "Sample Parent",
+      "related_to": "Aarnav Sabale",
+      "message": ""
+    }
+  ]
+}
