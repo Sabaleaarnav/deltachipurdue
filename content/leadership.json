@@ -1,16 +1,16 @@
 {
   "members": [
     {
-      "name": "Ian Hedges",
-      "role": "President",
-      "email": "ihedges@purdue.edu",
-      "photo": "/assets/images/ian-headshot.jpeg"
-    },
-    {
       "name": "Aarnav Sabale",
-      "role": "Vice President",
+      "role": "President",
       "email": "asabale@purdue.edu",
       "photo": "/assets/images/20250627_132405_374d18.jpeg"
+    },
+    {
+      "name": "Justin Siclovan",
+      "role": "Vice President",
+      "email": "jsiclova@purdue.edu",
+      "photo": "/assets/images/20250627_132405_31f783.jpeg"
     },
     {
       "name": "Phillip Tuohy",
