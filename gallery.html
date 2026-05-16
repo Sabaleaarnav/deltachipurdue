@@ -3,56 +3,50 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Photo gallery from Delta Chi Fraternity at Purdue University. Brotherhood in action.">
-  
-  <title>Gallery — Delta Chi Purdue</title>
+  <meta name="description" content="A photo archive from Delta Chi Purdue — brotherhood, service, and life at 501 N. Russell.">
+  <meta name="theme-color" content="#6B0F1A">
+  <title>Gallery · Delta Chi Purdue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter+Tight:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body data-page="gallery">
+<body data-page="gallery" data-header="dark">
   <header id="site-header" class="site-header"></header>
-  
+
   <main>
-    <section class="section pt-header">
+    <section class="page-header has-image">
+      <img src="assets/images/20250627_132405_3a84e9.jpeg" alt="" loading="eager">
       <div class="container">
-        <div class="section-header fade-in">
-          <span class="overline">Memories</span>
-          <h2 class="headline-lg">Photo Gallery</h2>
-          <p>Brotherhood, service, and everything in between.</p>
-        </div>
-        
-        <!-- Gallery Grid -->
-        <div class="gallery-grid" id="gallery-grid">
-          <!-- Populated by JS -->
-        </div>
+        <span class="overline">The Archive</span>
+        <h1>Photographs from <em class="italic-em" style="color: var(--buff-400);">the chapter</em>.</h1>
+        <p class="lede">A growing photo archive — brotherhood retreats, service projects, formal nights, and ordinary days at 501 N. Russell.</p>
       </div>
     </section>
-    
-    <!-- Follow CTA -->
-    <section class="section section-gray">
+
+    <section class="section">
+      <div class="container">
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section--bone section--sm">
       <div class="container text-center">
-        <h3 class="headline-md fade-in">Want More?</h3>
-        <p class="fade-in stagger-1" style="color: var(--gray-600); margin-bottom: var(--space-lg);">
-          Follow us on Instagram for the latest updates.
-        </p>
-        <div class="fade-in stagger-2">
-          <a href="https://instagram.com/deltachipurdue" target="_blank" rel="noopener" class="btn btn-primary">
-            Follow @deltachipurdue
-          </a>
+        <h3 class="display-sm reveal">Want more?</h3>
+        <p class="reveal r-1 mt-md" style="margin: 0 auto 32px;">Live photos and reels go up on Instagram.</p>
+        <div class="reveal r-2">
+          <a href="https://instagram.com/deltachipurdue" target="_blank" rel="noopener" class="btn btn--maroon">Follow @deltachipurdue</a>
         </div>
       </div>
     </section>
   </main>
-  
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
     <button class="lightbox-close" aria-label="Close lightbox">×</button>
-    <div class="lightbox-content">
-      <img src="" alt="" id="lightbox-img">
-    </div>
+    <img id="lightbox-img" src="" alt="">
   </div>
-  
+
   <footer id="site-footer" class="site-footer"></footer>
-  
   <script src="assets/js/shell.js"></script>
   <script src="assets/js/app.js" defer></script>
 </body>

@@ -3,38 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Upcoming and past events from Delta Chi Fraternity at Purdue University.">
-  
-  <title>Events — Delta Chi Purdue</title>
+  <meta name="description" content="Upcoming and past events at Delta Chi Purdue — brotherhood, service, philanthropy, and more.">
+  <meta name="theme-color" content="#6B0F1A">
+  <title>Events · Delta Chi Purdue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter+Tight:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body data-page="events">
+<body data-page="events" data-header="dark">
   <header id="site-header" class="site-header"></header>
-  
+
   <main>
-    <section class="section pt-header">
+    <section class="page-header has-image">
+      <img src="assets/images/20250627_132405_31029c.jpeg" alt="" loading="eager">
       <div class="container">
-        <div class="section-header fade-in">
-          <span class="overline">What's Happening</span>
-          <h2 class="headline-lg">Events</h2>
-          <p>Brotherhood, service, philanthropy, and everything in between.</p>
-        </div>
-        
-        <!-- Filters -->
-        <div class="filters fade-in" id="event-filters">
-          <!-- Populated by JS -->
-        </div>
-        
-        <!-- Events Grid -->
-        <div class="events-grid" id="events-list">
-          <!-- Populated by JS -->
+        <span class="overline">The Chapter Calendar</span>
+        <h1>Events &amp; <em class="italic-em" style="color: var(--buff-400);">moments</em>.</h1>
+        <p class="lede">Brotherhood retreats, service projects, philanthropy nights, and the social calendar that holds the chapter together.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="filters reveal" id="event-filters"></div>
+        <div class="events-list" id="events-list"></div>
+      </div>
+    </section>
+
+    <section class="cta-strip">
+      <div class="container">
+        <div class="reveal">
+          <span class="overline" style="color: var(--buff-400);">Stay in the loop</span>
+          <h2 class="display-md" style="color: var(--cream); margin: 18px auto 18px; max-width: 22ch;">Follow the chapter on Instagram.</h2>
+          <p class="lede" style="color: rgba(244,235,221,0.8); margin: 0 auto 36px;">
+            Photos, event invites, and updates land on @deltachipurdue first.
+          </p>
+          <a href="https://instagram.com/deltachipurdue" target="_blank" rel="noopener" class="btn btn--gold btn--lg">Follow @deltachipurdue</a>
         </div>
       </div>
     </section>
   </main>
-  
+
   <footer id="site-footer" class="site-footer"></footer>
-  
   <script src="assets/js/shell.js"></script>
   <script src="assets/js/app.js" defer></script>
 </body>

@@ -3,120 +3,129 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Delta Chi Purdue alumni relations. Stay connected with your brothers.">
-  
-  <title>Alumni — Delta Chi Purdue</title>
+  <meta name="description" content="Delta Chi Purdue alumni portal. Homecoming, newsletters, mentorship, and ways to stay in the chapter.">
+  <meta name="theme-color" content="#6B0F1A">
+  <title>Alumni · Delta Chi Purdue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter+Tight:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body data-page="alumni">
+<body data-page="alumni" data-header="dark">
   <header id="site-header" class="site-header"></header>
-  
+
   <main>
-    <!-- Hero -->
-    <section class="alumni-hero">
+    <section class="page-header has-image">
+      <img src="assets/images/20250627_132405_38a9c1.jpeg" alt="" loading="eager">
       <div class="container">
-        <div class="section-header fade-in">
-          <span class="overline">Welcome Back</span>
-          <h2 class="headline-lg">Alumni Relations</h2>
-          <p>Once a brother, always a brother. Stay connected with Delta Chi Purdue.</p>
-        </div>
+        <span class="overline">Alumni · Indiana Chapter</span>
+        <h1>Once a brother, <em class="italic-em" style="color: var(--buff-400);">always</em> a brother.</h1>
+        <p class="lede">Homecoming, mentorship, the monthly newsletter, and the open door at 501 N. Russell — the alumni portal for Delta Chi at Purdue.</p>
       </div>
     </section>
-    
+
+    <!-- HOMECOMING -->
     <section class="section">
       <div class="container">
-        <!-- Homecoming Card -->
-        <div class="homecoming-card fade-in">
-          <span class="homecoming-badge">Featured Event</span>
-          <h3 class="homecoming-title">Homecoming Tailgate & House Tour</h3>
-          <div class="homecoming-date">Saturday, October 25, 2025</div>
-          
-          <div class="homecoming-details">
-            <div class="homecoming-detail">
-              <div class="homecoming-detail-label">Time</div>
-              <div class="homecoming-detail-value">9:00 AM</div>
-            </div>
-            <div class="homecoming-detail">
-              <div class="homecoming-detail-label">Location</div>
-              <div class="homecoming-detail-value">501 N Russell St</div>
-            </div>
-            <div class="homecoming-detail">
-              <div class="homecoming-detail-label">Event</div>
-              <div class="homecoming-detail-value">House Tour + Tailgate</div>
-            </div>
-          </div>
-          
-          <p style="color: var(--gray-600); margin-bottom: var(--space-md);">
-            Join us for a house tour at 9:00 AM followed by a tailgate before the game. 
-            Reconnect with brothers, meet the new generation, and celebrate our legacy. Family welcome!
-          </p>
-          
-          <div class="homecoming-ctas">
-            <a id="rsvp-link" href="#" target="_blank" rel="noopener" class="btn btn-gold">RSVP Now</a>
-            <button id="add-to-calendar" class="btn btn-outline-dark">Add to Calendar</button>
-          </div>
+        <div class="section-header section-header--left reveal">
+          <span class="overline">Featured · Fall 2025</span>
+          <h2 class="display-sm mt-sm">Homecoming &amp; House Tour.</h2>
         </div>
-        
-        <!-- Why Connect -->
-        <div class="grid grid-3 mt-xl">
-          <div class="value-card fade-in stagger-1">
-            <div class="value-icon">🔄</div>
-            <h3 class="value-title">Reconnect</h3>
-            <p class="value-text">See the house, meet the current brothers, and reconnect with your era.</p>
+
+        <div class="feature-event reveal">
+          <div class="feature-event-image">
+            <img src="assets/images/20250627_132405_3db167.jpeg" alt="Homecoming at the Delta Chi house" loading="lazy">
           </div>
-          
-          <div class="value-card fade-in stagger-2">
-            <div class="value-icon">🎯</div>
-            <h3 class="value-title">Mentor</h3>
-            <p class="value-text">Share career advice, professional connections, and life lessons with the next generation.</p>
-          </div>
-          
-          <div class="value-card fade-in stagger-3">
-            <div class="value-icon">💪</div>
-            <h3 class="value-title">Support</h3>
-            <p class="value-text">Help us reach our goals and build a stronger chapter for future brothers.</p>
+          <div class="feature-event-body">
+            <div class="feature-event-badge">Homecoming · 2025</div>
+            <h3 class="feature-event-title">Tailgate &amp; House Tour at 501 N. Russell</h3>
+            <div class="feature-event-date">Saturday · October 25, 2025</div>
+
+            <dl class="feature-event-details">
+              <div class="feature-event-detail">
+                <dt>Time</dt>
+                <dd>9:00 AM</dd>
+              </div>
+              <div class="feature-event-detail">
+                <dt>Location</dt>
+                <dd>501 N. Russell</dd>
+              </div>
+              <div class="feature-event-detail">
+                <dt>Event</dt>
+                <dd>Tour + Tailgate</dd>
+              </div>
+            </dl>
+
+            <p class="feature-event-blurb">
+              House tour at 9:00 AM, tailgate to follow before the game. Reconnect with brothers, meet the new generation, and tour the chapter house. Family welcome.
+            </p>
+
+            <div class="feature-event-ctas">
+              <a id="rsvp-link" href="#" target="_blank" rel="noopener" class="btn btn--maroon">RSVP</a>
+              <button id="add-to-calendar" class="btn btn--ghost">Add to Calendar</button>
+            </div>
           </div>
         </div>
       </div>
     </section>
-    
-    <!-- Newsletter Section -->
-    <section class="section section-gray" id="newsletter">
+
+    <!-- WHY CONNECT -->
+    <section class="section section--parchment">
       <div class="container">
-        <div class="newsletter-section fade-in">
-          <span class="overline">Stay Updated</span>
-          <h3 class="headline-md">Monthly Newsletter</h3>
-          <p>Catch up on chapter news, events, and alumni updates.</p>
-          
-          <div class="newsletter-list" id="newsletter-list">
-            <!-- Populated by JS from content/newsletters.json -->
-            <p class="newsletter-empty">Newsletter archive coming soon. Subscribe to be notified!</p>
-          </div>
-          
-          <div class="donation-embed-placeholder">
-            <p><strong>Newsletter subscription coming soon</strong></p>
-            <p style="font-size: 0.875rem;">We're setting up our newsletter platform. Check back soon!</p>
-          </div>
+        <div class="section-header reveal">
+          <span class="overline">Three Ways to Stay In</span>
+          <h2 class="display-sm">Your chapter, still.</h2>
+        </div>
+
+        <div class="three-up">
+          <article class="three-up-item reveal r-1">
+            <span class="three-up-num">i.</span>
+            <h4>Reconnect</h4>
+            <p>See the house, meet the actives, and reconnect with brothers from your era. Homecoming, founders' day, and informal visits are always on the table.</p>
+          </article>
+          <article class="three-up-item reveal r-2">
+            <span class="three-up-num">ii.</span>
+            <h4>Mentor</h4>
+            <p>Share career advice, professional connections, and life lessons with the next generation of brothers — formally through the mentorship program or informally over coffee.</p>
+          </article>
+          <article class="three-up-item reveal r-3">
+            <span class="three-up-num">iii.</span>
+            <h4>Support</h4>
+            <p>Help us reach our chapter goals — scholarships, the house, programming. Every gift is recognized on the donor wall.</p>
+          </article>
         </div>
       </div>
     </section>
-    
-    <!-- Donate CTA -->
-    <section class="section section-maroon">
-      <div class="container text-center">
-        <h2 class="headline-lg fade-in" style="color: var(--white);">Support the Chapter</h2>
-        <p class="fade-in stagger-1" style="color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto var(--space-lg);">
-          Your contributions help fund programming, service projects, and scholarships.
-        </p>
-        <div class="fade-in stagger-2">
-          <a href="donate.html" class="btn btn-gold btn-lg">Make a Gift</a>
+
+    <!-- NEWSLETTER -->
+    <section class="section" id="newsletter">
+      <div class="container container-narrow">
+        <div class="section-header section-header--left reveal">
+          <span class="overline">Stay Updated</span>
+          <h2 class="display-sm mt-sm">The monthly newsletter.</h2>
+          <p>A monthly digest from the chapter — academic standings, philanthropy results, new initiates, and what's on the calendar.</p>
+        </div>
+
+        <div class="newsletter-list reveal" id="newsletter-list"></div>
+      </div>
+    </section>
+
+    <!-- GIVE CTA -->
+    <section class="cta-strip">
+      <div class="container">
+        <div class="reveal">
+          <span class="overline" style="color: var(--buff-400);">Support the Chapter</span>
+          <h2 class="display-md" style="color: var(--cream); margin: 18px auto 18px; max-width: 22ch;">Help build the chapter you'd be proud to bring a recruit to.</h2>
+          <p class="lede" style="color: rgba(244,235,221,0.8); margin: 0 auto 36px;">
+            Your gift funds scholarships, brotherhood programming, and the upkeep of the house. Every contribution is recognized on the donor wall.
+          </p>
+          <a href="donate.html" class="btn btn--gold btn--lg">Make a Gift</a>
         </div>
       </div>
     </section>
   </main>
-  
+
   <footer id="site-footer" class="site-footer"></footer>
-  
   <script src="assets/js/shell.js"></script>
   <script src="assets/js/app.js" defer></script>
 </body>

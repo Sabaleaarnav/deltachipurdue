@@ -1,16 +1,16 @@
 {
   "members": [
     {
-      "name": "Aarnav Sabale",
+      "name": "Ian Hedges",
       "role": "President",
-      "email": "asabale@purdue.edu",
-      "photo": "/assets/images/20250627_132405_374d18.jpeg"
+      "email": "ihedges@purdue.edu",
+      "photo": "/assets/images/ian-headshot.jpeg"
     },
     {
-      "name": "Justin Siclovan",
+      "name": "Aarnav Sabale",
       "role": "Vice President",
-      "email": "jsiclova@purdue.edu",
-      "photo": "/assets/images/20250627_132405_31f783.jpeg"
+      "email": "asabale@purdue.edu",
+      "photo": "/assets/images/20250627_132405_374d18.jpeg"
     },
     {
       "name": "Phillip Tuohy",
@@ -19,52 +19,64 @@
       "photo": "/assets/images/20250627_132405_31e469.jpeg"
     },
     {
-      "name": "Ishaan Singh",
+      "name": "Cooper Rigney",
       "role": "Treasurer",
       "email": "",
-      "photo": ""
+      "photo": "/assets/images/20250627_132405_38a9c1.jpeg"
     },
     {
-      "name": "Julio Cortezano",
+      "name": "Liam Simpson",
       "role": "Alumni Relations",
       "email": "alumni@deltachipurdue.org",
-      "photo": ""
+      "photo": "/assets/images/20250627_132405_370664.jpeg"
     },
     {
-      "name": "Trevor Martin",
+      "name": "Aslan Emberton",
       "role": "Risk Manager",
       "email": "",
-      "photo": ""
+      "photo": "/assets/images/image-10-.jpg"
     },
     {
-      "name": "Luke Olmstead",
+      "name": "Zach O'Connell",
       "role": "Scholarship Chair",
       "email": "",
-      "photo": ""
+      "photo": "/assets/images/20250627_132405_3db167.jpeg"
     },
     {
-      "name": "Bek Tiedge",
+      "name": "Nick Dolce",
       "role": "Associate Member Counselor",
       "email": "",
-      "photo": ""
+      "photo": "/assets/images/20250627_132405_31e927.jpeg"
     },
     {
-      "name": "Andrew Zghera",
+      "name": "Jonah Pomerantz",
       "role": "Associate Member Counselor",
       "email": "",
-      "photo": ""
+      "photo": "/assets/images/20250627_132405_31029c.jpeg"
+    },
+    {
+      "name": "Sean Pitts",
+      "role": "Associate Member Counselor",
+      "email": "",
+      "photo": "/assets/images/20250627_132405_3a84e9.jpeg"
+    },
+    {
+      "name": "Benjamin Schoeph",
+      "role": "Recruitment Chair",
+      "email": "",
+      "photo": "/assets/images/img_1137.jpg"
+    },
+    {
+      "name": "Justin Siclovan",
+      "role": "Recruitment Chair",
+      "email": "",
+      "photo": "/assets/images/20250627_132405_31f783.jpeg"
     },
     {
       "name": "Riley Omar",
       "role": "Recruitment Chair",
       "email": "",
       "photo": "/assets/images/20250627_132405_38ca3e.jpeg"
-    },
-    {
-      "name": "Nick Morris",
-      "role": "Recruitment Chair",
-      "email": "",
-      "photo": ""
     },
     {
       "name": "Jessica Richardson (Jessie)",

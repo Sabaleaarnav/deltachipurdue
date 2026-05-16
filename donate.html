@@ -3,152 +3,125 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Support Delta Chi Purdue. Your donation helps fund programming, service projects, and scholarships.">
-  
-  <title>Donate — Delta Chi Purdue</title>
+  <meta name="description" content="Support Delta Chi at Purdue. Your gift funds programming, scholarships, and the upkeep of the chapter house.">
+  <meta name="theme-color" content="#6B0F1A">
+  <title>Give · Delta Chi Purdue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter+Tight:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body data-page="donate">
+<body data-page="donate" data-header="dark">
   <header id="site-header" class="site-header"></header>
-  
+
   <main>
-    <!-- Hero -->
-    <section class="donate-hero section-gray">
+    <section class="page-header has-image">
+      <img src="assets/images/20250627_132405_31e927.jpeg" alt="" loading="eager">
       <div class="container">
-        <div class="section-header fade-in" style="padding-top: var(--header-height);">
-          <span class="overline">Give Back</span>
-          <h2 class="headline-lg">Support ΔΧ Purdue</h2>
-          <p>Your generosity helps us build leaders, serve our community, and create lasting memories.</p>
-        </div>
+        <span class="overline">Support · ΔΧ Indiana Chapter</span>
+        <h1>Give to <em class="italic-em" style="color: var(--buff-400);">Delta Chi</em> Purdue.</h1>
+        <p class="lede">Every dollar supports chapter programming, scholarships, and the upkeep of 501 N. Russell. Every gift — alumni, parent, or friend — is recognized on our donor wall.</p>
       </div>
     </section>
-    
+
     <section class="section">
       <div class="container">
-        <!-- Donor Type Tabs -->
-        <div class="donate-tabs">
-          <button class="tab-btn active" data-tab="alumni">Alumni</button>
-          <button class="tab-btn" data-tab="family">Parents & Family</button>
-        </div>
-        
-        <!-- Alumni Panel -->
-        <div class="donate-panel active" id="panel-alumni">
-          <div class="donate-card fade-in">
-            <h3>Alumni Giving</h3>
-            <p class="donate-description">
-              Support your chapter and leave a legacy. All gifts support programming, service projects, and scholarship.
-            </p>
-            
-            <!-- Zeffy Placeholder -->
-            <div class="donation-embed-placeholder">
-              <p><strong>Donation platform coming soon</strong></p>
-              <p style="font-size: 0.875rem; margin-top: 0.5rem;">
-                We're integrating a 100% free donation platform (Zeffy) so every dollar goes directly to the chapter.
-              </p>
-              <p style="font-size: 0.875rem; margin-top: 0.5rem;">
-                In the meantime, use the link below:
-              </p>
+        <div class="donate-layout">
+          <!-- LEFT: cards & tabs -->
+          <div>
+            <div class="donate-tabs">
+              <button class="tab-btn active" data-tab="alumni">Alumni</button>
+              <button class="tab-btn" data-tab="family">Parents &amp; Family</button>
             </div>
-            
-            <div class="donate-cta-group mt-lg">
-              <a id="donate-link-alumni" href="#" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="width: 100%;">
-                Donate via OmegaFi
-              </a>
+
+            <div class="donate-panel active" id="panel-alumni">
+              <div class="donate-card reveal">
+                <h3>Alumni Giving</h3>
+                <p class="donate-description">Support your chapter and leave a legacy. All gifts go directly to programming, service, and scholarship.</p>
+
+                <div class="donation-embed-placeholder">
+                  <strong>Donation platform coming soon.</strong>
+                  <p style="margin-top: 6px;">We're integrating a 100% fee-free donation platform so every dollar reaches the chapter. In the meantime, give through OmegaFi below.</p>
+                </div>
+
+                <div class="mt-lg">
+                  <a id="donate-link-alumni" href="#" target="_blank" rel="noopener" class="btn btn--maroon btn--lg" style="width:100%;">Donate via OmegaFi <span class="arrow" aria-hidden="true"></span></a>
+                </div>
+                <p class="caption text-center mt-md" style="color: var(--fg-muted);">After giving, add your name to the donor wall — email <a class="inline-link" href="mailto:alumni@deltachipurdue.org">alumni@deltachipurdue.org</a>.</p>
+              </div>
             </div>
-            
-            <p class="caption text-center mt-md" style="color: var(--gray-600);">
-              Add your name to our Donor Wall after giving.
-            </p>
-          </div>
-        </div>
-        
-        <!-- Family Panel -->
-        <div class="donate-panel" id="panel-family">
-          <div class="donate-card fade-in">
-            <h3>Parents & Family Giving</h3>
-            <p class="donate-description">
-              Support your student and the Delta Chi experience. Your gift helps fund chapter activities, house improvements, and more.
-            </p>
-            
-            <!-- Zeffy Placeholder -->
-            <div class="donation-embed-placeholder">
-              <p><strong>Donation platform coming soon</strong></p>
-              <p style="font-size: 0.875rem; margin-top: 0.5rem;">
-                We're integrating a 100% free donation platform so every dollar goes directly to supporting our brothers.
-              </p>
-            </div>
-            
-            <div class="donate-cta-group mt-lg">
-              <a id="donate-link-family" href="#" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="width: 100%;">
-                Donate Now
-              </a>
+
+            <div class="donate-panel" id="panel-family">
+              <div class="donate-card reveal">
+                <h3>Parents &amp; Family Giving</h3>
+                <p class="donate-description">Support your student and the Delta Chi experience. Your gift funds chapter activities, house improvements, and academic programming.</p>
+
+                <div class="donation-embed-placeholder">
+                  <strong>Donation platform coming soon.</strong>
+                  <p style="margin-top: 6px;">We're integrating a fee-free donation platform so every dollar reaches the chapter directly.</p>
+                </div>
+
+                <div class="mt-lg">
+                  <a id="donate-link-family" href="#" target="_blank" rel="noopener" class="btn btn--maroon btn--lg" style="width:100%;">Family Donation Page <span class="arrow" aria-hidden="true"></span></a>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- RIGHT: chapter goals -->
+          <aside class="reveal r-2">
+            <div class="section-header section-header--left" style="margin-bottom: 24px;">
+              <span class="overline">Active</span>
+              <h3 class="display-sm mt-sm">Chapter Goals</h3>
+              <p>Track our progress on current fundraising priorities.</p>
+            </div>
+            <div id="goals-list"></div>
+          </aside>
         </div>
-        
-        <!-- Goals -->
-        <div class="goals-section">
-          <div class="section-header fade-in">
-            <h3 class="headline-md">Chapter Goals</h3>
-            <p>Track our progress on current fundraising initiatives.</p>
+
+        <!-- DONOR WALL -->
+        <div class="mt-xl">
+          <div class="section-header reveal">
+            <span class="overline">Donor Wall</span>
+            <h3 class="display-sm">Thank you.</h3>
+            <p>The brothers, families, and friends who have supported Delta Chi Purdue.</p>
           </div>
-          
-          <div id="goals-list">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-        
-        <!-- Donor Wall -->
-        <div class="donor-wall mt-xl">
-          <div class="section-header fade-in">
-            <h3 class="headline-md">Donor Wall</h3>
-            <p>Thank you to everyone who has supported Delta Chi Purdue.</p>
-          </div>
-          
-          <div class="filters" id="donor-filters">
-            <!-- Populated by JS -->
-          </div>
-          
-          <div class="donors-grid" id="donor-list">
-            <!-- Populated by JS -->
-          </div>
+
+          <div class="filters reveal" id="donor-filters"></div>
+          <div class="donor-grid" id="donor-list"></div>
         </div>
       </div>
     </section>
-    
-    <!-- Impact Section -->
-    <section class="section section-gray">
+
+    <!-- WHERE YOUR GIFT GOES -->
+    <section class="section section--parchment">
       <div class="container">
-        <div class="section-header fade-in">
+        <div class="section-header reveal">
           <span class="overline">Your Impact</span>
-          <h3 class="headline-md">Where Your Gift Goes</h3>
+          <h2 class="display-sm">Where your gift goes.</h2>
         </div>
-        
-        <div class="grid grid-3">
-          <div class="value-card fade-in stagger-1">
-            <div class="value-icon">🎓</div>
-            <h3 class="value-title">Scholarships</h3>
-            <p class="value-text">Support brothers who demonstrate academic excellence and financial need.</p>
-          </div>
-          
-          <div class="value-card fade-in stagger-2">
-            <div class="value-icon">🏠</div>
-            <h3 class="value-title">House Improvements</h3>
-            <p class="value-text">Maintain and upgrade our historic chapter house for future generations.</p>
-          </div>
-          
-          <div class="value-card fade-in stagger-3">
-            <div class="value-icon">🌟</div>
-            <h3 class="value-title">Programming</h3>
-            <p class="value-text">Fund leadership development, brotherhood events, and service projects.</p>
-          </div>
+        <div class="impact-list">
+          <article class="impact-item reveal r-1">
+            <span class="impact-item-num">i.</span>
+            <h4>Scholarships</h4>
+            <p>Support brothers who demonstrate academic excellence and financial need.</p>
+          </article>
+          <article class="impact-item reveal r-2">
+            <span class="impact-item-num">ii.</span>
+            <h4>House upkeep</h4>
+            <p>Maintain and upgrade our historic chapter house at 501 N. Russell for future generations.</p>
+          </article>
+          <article class="impact-item reveal r-3">
+            <span class="impact-item-num">iii.</span>
+            <h4>Programming</h4>
+            <p>Fund leadership development, brotherhood retreats, philanthropy, and service projects.</p>
+          </article>
         </div>
       </div>
     </section>
   </main>
-  
+
   <footer id="site-footer" class="site-footer"></footer>
-  
   <script src="assets/js/shell.js"></script>
   <script src="assets/js/app.js" defer></script>
 </body>
