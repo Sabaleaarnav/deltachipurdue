@@ -112,30 +112,37 @@
   // PAGE: HOME
   // ========================================
   
-  async function initHomePage() {
-    // Load alumni spotlight
+  async function initAlumniSpotlight() {
     const spotlightSection = $('#alumni-spotlight');
-    if (spotlightSection) {
-      try {
-        const data = await loadJSON('content/alumni-spotlights.json');
-        if (data && data.spotlights && data.spotlights.length > 0) {
-          const s = data.spotlights[0];
-          const container = spotlightSection.querySelector('.spotlight-content');
-          if (container) {
-            container.innerHTML = `
-              <blockquote class="spotlight-quote">${s.quote || 'Quote coming soon...'}</blockquote>
-              <div class="spotlight-author">
-                ${s.photo ? `<img src="${s.photo}" alt="${s.name}" class="spotlight-avatar">` : ''}
-                <div>
-                  <div class="spotlight-name">${s.name || 'Alumni Name'}</div>
-                  <div class="spotlight-title">${s.title || ''} ${s.company ? '• ' + s.company : ''}</div>
-                </div>
-              </div>
-            `;
-          }
-        }
-      } catch (e) {}
+    if (!spotlightSection) return;
+
+    const image = spotlightSection.querySelector('.spotlight-image img');
+    const hideBrokenSpotlightImage = () => image?.closest('.spotlight-image')?.setAttribute('hidden', '');
+    if (image) {
+      image.addEventListener('error', hideBrokenSpotlightImage, { once: true });
+      if (!image.getAttribute('src')) hideBrokenSpotlightImage();
     }
+
+    try {
+      const data = await loadJSON('content/alumni-spotlights.json');
+      if (data && data.spotlights && data.spotlights.length > 0) {
+        const s = data.spotlights[0];
+        const quoteEl = spotlightSection.querySelector('.spotlight-quote');
+        const avatarEl = spotlightSection.querySelector('.spotlight-avatar');
+        const nameEl = spotlightSection.querySelector('.spotlight-name');
+        const titleEl = spotlightSection.querySelector('.spotlight-title');
+        const quote = (s.quote || '').trim();
+
+        if (quoteEl && quote && quote.toLowerCase() !== 'quote here') quoteEl.textContent = quote;
+        if (avatarEl && s.photo) avatarEl.src = s.photo;
+        if (nameEl && s.name) nameEl.textContent = s.name;
+        if (titleEl) titleEl.textContent = `${s.title || ''} ${s.company ? '• ' + s.company : ''}`.trim();
+      }
+    } catch (e) {}
+  }
+
+  async function initHomePage() {
+    await initAlumniSpotlight();
     
     // Load career outcomes
     const careersGrid = $('#careers-grid');
@@ -345,6 +352,7 @@
   // ========================================
   
   async function initAlumniPage() {
+    await initAlumniSpotlight();
     const settings = await loadJSON('content/settings.json');
     
     // RSVP link
