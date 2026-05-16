@@ -166,7 +166,7 @@
     if (!data || !data.members) return;
     
     const members = data.members;
-    const defaultPhoto = 'assets/images/placeholder-avatar.png';
+    const defaultPhoto = 'assets/images/placeholder-avatar.svg';
     const getPhoto = (m) => m.photo || defaultPhoto;
     
     const createFeaturedCard = (m) => `
@@ -216,6 +216,12 @@
     if (execEl) execEl.innerHTML = execOthers.map(createCard).join('');
     if (recruitEl) recruitEl.innerHTML = recruiters.length ? recruiters.map(createCard).join('') : '<p class="empty-state">Coming soon</p>';
     if (amcEl) amcEl.innerHTML = amcs.length ? amcs.map(createCard).join('') : '<p class="empty-state">Coming soon</p>';
+
+    $$('.leader-featured-image, .leader-image').forEach((img) => {
+      img.addEventListener('error', () => {
+        if (!img.src.endsWith(defaultPhoto)) img.src = defaultPhoto;
+      }, { once: true });
+    });
     
     // Tabs
     const tabs = $('#leader-tabs');
