@@ -3,62 +3,68 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="The Executive Board and chapter leadership of Delta Chi at Purdue University.">
-  <meta name="theme-color" content="#6B0F1A">
-  <title>Leadership · Delta Chi Purdue</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <meta name="description" content="Meet the Executive Board and leadership of Delta Chi Fraternity at Purdue University.">
+  
+  <title>Leadership — Delta Chi Purdue</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body data-page="leadership" data-header="dark">
+<body data-page="leadership">
   <header id="site-header" class="site-header"></header>
-
+  
   <main>
-    <section class="page-header has-image">
-      <img src="assets/images/20250627_132405_374d18.jpeg" alt="" loading="eager">
+    <section class="section pt-header">
       <div class="container">
-        <span class="overline">Executive Board · 2025</span>
-        <h1>The brothers <em class="italic-em" style="color: var(--buff-400);">running</em> the chapter.</h1>
-        <p class="lede">Every position carries weight. Below are the brothers leading Delta Chi Purdue this term.</p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="tabs reveal" id="leader-tabs" role="tablist">
+        <div class="section-header fade-in">
+          <span class="overline">Our Team</span>
+          <h2 class="headline-lg">Chapter Leadership</h2>
+          <p>The brothers guiding Delta Chi Purdue forward.</p>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs fade-in" id="leader-tabs">
           <button class="tab-btn active" data-tab="exec">Executive Board</button>
           <button class="tab-btn" data-tab="recruit">Recruitment</button>
           <button class="tab-btn" data-tab="amc">Associate Member Counselors</button>
-          <button class="tab-btn" data-tab="house">House Mom</button>
         </div>
-
-        <div class="leader-featured" id="leaders-featured" aria-label="Featured leadership"></div>
-        <div class="leader-grid" id="leaders-exec" aria-label="Executive board"></div>
-        <div class="leader-grid" id="leaders-recruit" style="display:none;" aria-label="Recruitment team"></div>
-        <div class="leader-grid" id="leaders-amc" style="display:none;" aria-label="Associate Member Counselors"></div>
-        <div class="leader-grid" id="leaders-housemom" style="display:none;" aria-label="House Mom"></div>
+        
+        <!-- Featured Leaders (President & VP) -->
+        <div class="leaders-featured" id="leaders-featured">
+          <!-- Populated by JS -->
+        </div>
+        
+        <!-- Executive Board -->
+        <div class="leadership-grid" id="leaders-exec">
+          <!-- Populated by JS -->
+        </div>
+        
+        <!-- Recruitment Team -->
+        <div class="leadership-grid" id="leaders-recruit" style="display: none;">
+          <!-- Populated by JS -->
+        </div>
+        
+        <!-- AMCs -->
+        <div class="leadership-grid" id="leaders-amc" style="display: none;">
+          <!-- Populated by JS -->
+        </div>
       </div>
     </section>
-
-    <section class="cta-strip">
-      <div class="container">
-        <div class="reveal">
-          <span class="overline" style="color: var(--buff-400);">Questions or coverage?</span>
-          <h2 class="display-md" style="color: var(--cream); margin: 18px auto 18px; max-width: 20ch;">Reach the chapter directly.</h2>
-          <p class="lede" style="color: rgba(244,235,221,0.8); margin: 0 auto 36px;">
-            For chapter business, partnership, press, or Greek life coordination, the fastest path is email.
-          </p>
-          <div style="display:flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-            <a href="mailto:purduedeltachi@gmail.com" class="btn btn--gold btn--lg">Contact the Chapter</a>
-            <a href="contact.html" class="btn btn--ghost-light btn--lg">All Contacts</a>
-          </div>
+    
+    <!-- Contact CTA -->
+    <section class="section section-gray">
+      <div class="container text-center">
+        <h3 class="headline-md fade-in">Questions?</h3>
+        <p class="fade-in stagger-1" style="color: var(--gray-600); margin-bottom: var(--space-lg);">
+          Reach out to our executive board or contact us directly.
+        </p>
+        <div class="fade-in stagger-2">
+          <a href="mailto:purduedeltachi@gmail.com" class="btn btn-primary">Contact Us</a>
         </div>
       </div>
     </section>
   </main>
-
+  
   <footer id="site-footer" class="site-footer"></footer>
+  
   <script src="assets/js/shell.js"></script>
   <script src="assets/js/app.js" defer></script>
 </body>

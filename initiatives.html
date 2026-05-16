@@ -3,54 +3,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="The brotherhood, service, philanthropy, and fundraising programs of Delta Chi at Purdue University.">
-  <meta name="theme-color" content="#6B0F1A">
-  <title>Initiatives · Delta Chi Purdue</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <meta name="description" content="Delta Chi Purdue initiatives in brotherhood, service, philanthropy, and fundraising.">
+  
+  <title>Initiatives — Delta Chi Purdue</title>
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body data-page="initiatives" data-header="dark">
+<body data-page="initiatives">
   <header id="site-header" class="site-header"></header>
-
+  
   <main>
-    <section class="page-header has-image">
-      <img src="assets/images/20250627_132405_31e469.jpeg" alt="" loading="eager">
+    <section class="section pt-header">
       <div class="container">
-        <span class="overline">What We Do</span>
-        <h1>Initiatives &amp; <em class="italic-em" style="color: var(--buff-400);">causes</em>.</h1>
-        <p class="lede">Brotherhood, service, philanthropy, and fundraising — the programs that hold the chapter together and the causes we stand behind.</p>
+        <div class="section-header fade-in">
+          <span class="overline">What We Do</span>
+          <h2 class="headline-lg">Initiatives</h2>
+          <p>Brotherhood, service, philanthropy, and fundraising programs.</p>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="tabs fade-in" id="init-tabs">
+          <!-- Populated by JS -->
+        </div>
+        
+        <!-- Content Grid -->
+        <div class="grid grid-2" id="init-list">
+          <!-- Populated by JS -->
+        </div>
       </div>
     </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="tabs reveal" id="init-tabs"></div>
-        <div class="init-list" id="init-list"></div>
-      </div>
-    </section>
-
-    <section class="cta-strip">
-      <div class="container">
-        <div class="reveal">
-          <span class="overline" style="color: var(--buff-400);">Get Involved</span>
-          <h2 class="display-md" style="color: var(--cream); margin: 18px auto 18px; max-width: 22ch;">
-            Recruit, mentor, or <em class="italic-em" style="color: var(--buff-400);">give back</em>.
-          </h2>
-          <p class="lede" style="color: rgba(244,235,221,0.8); margin: 0 auto 36px;">
-            Whether you're a prospective member, alumnus, or community partner — there's a way to plug in.
-          </p>
-          <div style="display:flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
-            <a href="rush.html" class="btn btn--gold btn--lg">Rush ΔΧ</a>
-            <a href="donate.html" class="btn btn--ghost-light btn--lg">Make a Gift</a>
-          </div>
+    
+    <!-- Get Involved CTA -->
+    <section class="section section-maroon">
+      <div class="container text-center">
+        <h2 class="headline-lg fade-in" style="color: var(--white);">Get Involved</h2>
+        <p class="fade-in stagger-1" style="color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto var(--space-lg);">
+          Whether you're a prospective member, alumni, or community partner—there's a place for you.
+        </p>
+        <div class="fade-in stagger-2" style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+          <a href="rush.html" class="btn btn-gold">Rush ΔΧ</a>
+          <a href="donate.html" class="btn btn-outline">Support Us</a>
         </div>
       </div>
     </section>
   </main>
-
+  
   <footer id="site-footer" class="site-footer"></footer>
+  
   <script src="assets/js/shell.js"></script>
   <script src="assets/js/app.js" defer></script>
 </body>

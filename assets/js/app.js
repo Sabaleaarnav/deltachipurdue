@@ -1,330 +1,432 @@
 /**
- * Delta Chi Purdue — App logic
- * Reveal animations, lightbox, page data loaders.
+ * Delta Chi Purdue — Main Application
+ * Page-specific logic, animations, and content loading
  */
-(function () {
+
+(function() {
   'use strict';
-
-  const $  = (s, c = document) => c.querySelector(s);
-  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
+  
+  // ========================================
+  // UTILITIES
+  // ========================================
+  
+  const $ = (selector, context = document) => context.querySelector(selector);
+  const $$ = (selector, context = document) => [...context.querySelectorAll(selector)];
+  
+  const formatDate = (iso) => {
+    if (!iso) return 'TBA';
+    const date = new Date(iso + (iso.length <= 10 ? 'T00:00:00' : ''));
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+  
+  const formatDateShort = (iso) => {
+    if (!iso) return 'TBA';
+    const date = new Date(iso + (iso.length <= 10 ? 'T00:00:00' : ''));
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+  };
+  
+  const clamp = (num, min, max) => Math.max(min, Math.min(max, num));
+  
   async function loadJSON(path) {
     try {
-      const r = await fetch(path, { cache: 'no-store' });
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      return await r.json();
+      const res = await fetch(path, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`Failed to load ${path}`);
+      return res.json();
     } catch (e) {
-      console.warn(`[loadJSON] ${path}:`, e.message);
+      console.warn(`Could not load ${path}:`, e);
       return null;
     }
   }
-
-  function initReveal(root = document) {
-    if (reduceMotion) {
-      $$('.reveal', root).forEach(el => el.classList.add('visible'));
-      return;
-    }
-    const els = $$('.reveal:not(.visible)', root);
-    if (!els.length) return;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
-    els.forEach(el => io.observe(el));
-  }
-
-  function initLightbox() {
-    const lb = $('#lightbox');
-    if (!lb) return;
-    const img = $('#lightbox-img');
-    const close = $('.lightbox-close', lb);
-
-    document.addEventListener('click', e => {
-      const item = e.target.closest('.gallery-item');
-      if (!item) return;
-      const src = item.querySelector('img');
-      if (!src) return;
-      img.src = src.src;
-      img.alt = src.alt || '';
-      lb.classList.add('open');
-      document.body.classList.add('no-scroll');
-    });
-    const dismiss = () => { lb.classList.remove('open'); document.body.classList.remove('no-scroll'); };
-    close && close.addEventListener('click', dismiss);
-    lb.addEventListener('click', e => { if (e.target === lb) dismiss(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) dismiss(); });
-  }
-
-  /* -------- HOME -------- */
-  async function initHome() {
-    // Alumni spotlight
-    const spotEl = $('#alumni-spotlight');
-    if (spotEl) {
-      const data = await loadJSON('content/alumni-spotlights.json');
-      const s = data?.spotlights?.[0];
-      if (s) {
-        const quoteEl  = $('.spotlight-quote', spotEl);
-        const nameEl   = $('.spotlight-name', spotEl);
-        const titleEl  = $('.spotlight-title', spotEl);
-        const photoEl  = $('.spotlight-author-photo', spotEl);
-        if (quoteEl && s.quote) quoteEl.textContent = s.quote;
-        if (nameEl) nameEl.textContent = s.name || '';
-        if (titleEl) {
-          const t = [s.title, s.company].filter(Boolean).join(' · ');
-          titleEl.textContent = t;
+  
+  // ========================================
+  // SCROLL ANIMATIONS
+  // ========================================
+  
+  function initScrollAnimations() {
+    const elements = $$('.fade-in, .fade-in-up, .scale-in');
+    if (!elements.length) return;
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
         }
-        if (photoEl && s.photo) photoEl.src = s.photo;
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+    
+    elements.forEach(el => observer.observe(el));
+  }
+  
+  // ========================================
+  // LIGHTBOX
+  // ========================================
+  
+  function initLightbox() {
+    const lightbox = $('#lightbox');
+    if (!lightbox) return;
+    
+    const lightboxImg = $('#lightbox-img');
+    const closeBtn = $('.lightbox-close', lightbox);
+    
+    document.addEventListener('click', (e) => {
+      const item = e.target.closest('.gallery-item');
+      if (item) {
+        const img = item.querySelector('img');
+        if (img && lightboxImg) {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightbox.classList.add('open');
+          document.body.classList.add('no-scroll');
+        }
       }
+    });
+    
+    const closeLightbox = () => {
+      lightbox.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    };
+    
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+    });
+  }
+  
+  // ========================================
+  // PAGE: HOME
+  // ========================================
+  
+  async function initHomePage() {
+    // Load alumni spotlight
+    const spotlightSection = $('#alumni-spotlight');
+    if (spotlightSection) {
+      try {
+        const data = await loadJSON('content/alumni-spotlights.json');
+        if (data && data.spotlights && data.spotlights.length > 0) {
+          const s = data.spotlights[0];
+          const container = spotlightSection.querySelector('.spotlight-content');
+          if (container) {
+            container.innerHTML = `
+              <blockquote class="spotlight-quote">${s.quote || 'Quote coming soon...'}</blockquote>
+              <div class="spotlight-author">
+                ${s.photo ? `<img src="${s.photo}" alt="${s.name}" class="spotlight-avatar">` : ''}
+                <div>
+                  <div class="spotlight-name">${s.name || 'Alumni Name'}</div>
+                  <div class="spotlight-title">${s.title || ''} ${s.company ? '• ' + s.company : ''}</div>
+                </div>
+              </div>
+            `;
+          }
+        }
+      } catch (e) {}
+    }
+    
+    // Load career outcomes
+    const careersGrid = $('#careers-grid');
+    if (careersGrid) {
+      try {
+        const data = await loadJSON('content/careers.json');
+        if (data && data.placements && data.placements.length > 0) {
+          careersGrid.innerHTML = data.placements.slice(0, 6).map(p => `
+            <div class="career-card fade-in">
+              ${p.logo ? `<img src="${p.logo}" alt="${p.company}" class="career-card-logo">` : ''}
+              <div class="career-card-company">${p.company}</div>
+              <div class="career-card-role">${p.role}</div>
+              <div class="career-card-year">${p.year}</div>
+            </div>
+          `).join('');
+          initScrollAnimations();
+        }
+      } catch (e) {}
     }
   }
-
-  /* -------- LEADERSHIP -------- */
-  async function initLeadership() {
+  
+  // ========================================
+  // PAGE: LEADERSHIP
+  // ========================================
+  
+  async function initLeadershipPage() {
     const data = await loadJSON('content/leadership.json');
     if (!data || !data.members) return;
-
+    
     const members = data.members;
-    const cleanPath = p => (!p ? 'assets/images/placeholder-avatar.svg' : p.replace(/^\//, ''));
-
-    const isRecruit = m => /recruitment/i.test(m.role);
-    const isAMC = m => /associate\s*member\s*counselor|amc/i.test(m.role);
-    const isHouseMom = m => /house\s*mom/i.test(m.role);
-    const isPres = m => /^president$/i.test(m.role);
-    const isVP = m => /vice\s*president|^vp$/i.test(m.role);
-
-    const president = members.find(isPres);
+    const defaultPhoto = 'assets/images/placeholder-avatar.png';
+    const getPhoto = (m) => m.photo || defaultPhoto;
+    
+    const createFeaturedCard = (m) => `
+      <div class="leader-featured fade-in">
+        <img src="${getPhoto(m)}" alt="${m.name}" class="leader-featured-image" loading="lazy">
+        <div class="leader-featured-info">
+          <h3>${m.name}</h3>
+          <div class="leader-featured-role">${m.role}</div>
+          ${m.email ? `<a href="mailto:${m.email}" class="leader-featured-email">${m.email}</a>` : ''}
+        </div>
+      </div>
+    `;
+    
+    const createCard = (m) => `
+      <div class="leader-card fade-in">
+        <img src="${getPhoto(m)}" alt="${m.name}" class="leader-image" loading="lazy">
+        <div class="leader-name">${m.name}</div>
+        <div class="leader-role">${m.role}</div>
+        ${m.email ? `<a href="mailto:${m.email}" class="leader-email">${m.email}</a>` : ''}
+      </div>
+    `;
+    
+    const isRecruit = (m) => /recruitment/i.test(m.role);
+    const isAMC = (m) => /associate\s*member\s*counselor|amc/i.test(m.role);
+    const isPresident = (m) => /^president$/i.test(m.role);
+    const isVP = (m) => /vice\s*president|^vp$/i.test(m.role);
+    
+    const president = members.find(isPresident);
     const vp = members.find(isVP);
-    const exec = members.filter(m => !isRecruit(m) && !isAMC(m) && !isPres(m) && !isVP(m) && !isHouseMom(m));
+    const execOthers = members.filter(m => !isRecruit(m) && !isAMC(m) && !isPresident(m) && !isVP(m));
     const recruiters = members.filter(isRecruit);
     const amcs = members.filter(isAMC);
-    const houseMom = members.find(isHouseMom);
-
-    const featCard = m => `
-      <article class="leader-feat-card reveal">
-        <div class="leader-feat-photo"><img src="${cleanPath(m.photo)}" alt="${m.name}" loading="lazy"></div>
-        <div class="leader-feat-body">
-          <div class="leader-feat-role">${m.role}</div>
-          <h3 class="leader-feat-name">${m.name}</h3>
-          ${m.email ? `<a class="leader-feat-email" href="mailto:${m.email}">${m.email}</a>` : ''}
-        </div>
-      </article>
-    `;
-
-    const card = (m, i) => `
-      <article class="leader-card reveal r-${(i % 6) + 1}">
-        <div class="leader-card-photo"><img src="${cleanPath(m.photo)}" alt="${m.name}" loading="lazy"></div>
-        <div class="leader-card-role">${m.role}</div>
-        <div class="leader-card-name">${m.name}</div>
-        ${m.email ? `<a class="leader-card-email" href="mailto:${m.email}">${m.email}</a>` : ''}
-      </article>
-    `;
-
-    const featEl = $('#leaders-featured');
+    
+    const featuredEl = $('#leaders-featured');
     const execEl = $('#leaders-exec');
-    const recEl  = $('#leaders-recruit');
-    const amcEl  = $('#leaders-amc');
-    const hmEl   = $('#leaders-housemom');
-
-    if (featEl) {
-      const feat = [president, vp].filter(Boolean);
-      featEl.innerHTML = feat.map(featCard).join('');
+    const recruitEl = $('#leaders-recruit');
+    const amcEl = $('#leaders-amc');
+    
+    if (featuredEl) {
+      const featured = [president, vp].filter(Boolean);
+      featuredEl.innerHTML = featured.length > 0 
+        ? featured.map(createFeaturedCard).join('') 
+        : '';
+      if (featured.length === 0) featuredEl.style.display = 'none';
     }
-    if (execEl) execEl.innerHTML = exec.map(card).join('');
-    if (recEl)  recEl.innerHTML  = recruiters.length ? recruiters.map(card).join('') : '<div class="empty-state">Recruitment team coming soon.</div>';
-    if (amcEl)  amcEl.innerHTML  = amcs.length ? amcs.map(card).join('') : '<div class="empty-state">No AMCs listed yet.</div>';
-    if (hmEl && houseMom) hmEl.innerHTML = card(houseMom, 0);
-
+    
+    if (execEl) execEl.innerHTML = execOthers.map(createCard).join('');
+    if (recruitEl) recruitEl.innerHTML = recruiters.length ? recruiters.map(createCard).join('') : '<p class="empty-state">Coming soon</p>';
+    if (amcEl) amcEl.innerHTML = amcs.length ? amcs.map(createCard).join('') : '<p class="empty-state">Coming soon</p>';
+    
+    // Tabs
     const tabs = $('#leader-tabs');
     if (tabs) {
-      tabs.addEventListener('click', e => {
+      tabs.addEventListener('click', (e) => {
         const btn = e.target.closest('.tab-btn');
         if (!btn) return;
+        
         $$('.tab-btn', tabs).forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        
         const tab = btn.dataset.tab;
-        const map = { exec: ['featured','exec'], recruit: ['recruit'], amc: ['amc'], house: ['housemom'] };
-        ['featured','exec','recruit','amc','housemom'].forEach(k => {
-          const el = $(`#leaders-${k}`);
-          if (!el) return;
-          el.style.display = map[tab]?.includes(k) ? '' : 'none';
-        });
+        if (featuredEl) featuredEl.style.display = tab === 'exec' ? '' : 'none';
+        if (execEl) execEl.style.display = tab === 'exec' ? '' : 'none';
+        if (recruitEl) recruitEl.style.display = tab === 'recruit' ? '' : 'none';
+        if (amcEl) amcEl.style.display = tab === 'amc' ? '' : 'none';
       });
     }
-    initReveal();
+    
+    initScrollAnimations();
   }
-
-  /* -------- EVENTS -------- */
-  async function initEvents() {
-    const cats = ['alumni','brotherhood','community-service','philanthropy','fundraising','social','academic'];
-    const all = [];
-    for (const c of cats) {
-      const d = await loadJSON(`content/events/${c}.json`);
-      if (d?.items) all.push(...d.items.map(it => ({ ...it, category: c })));
+  
+  // ========================================
+  // PAGE: EVENTS
+  // ========================================
+  
+  async function initEventsPage() {
+    const categories = ['alumni', 'brotherhood', 'community-service', 'philanthropy', 'fundraising', 'social', 'academic'];
+    let allEvents = [];
+    
+    // Load all events
+    for (const cat of categories) {
+      const data = await loadJSON(`content/events/${cat}.json`);
+      if (data && data.items) {
+        allEvents.push(...data.items.map(item => ({ ...item, category: cat })));
+      }
     }
-    all.sort((a,b) => new Date(b.date || '1900-01-01') - new Date(a.date || '1900-01-01'));
-
-    const filters = $('#event-filters');
-    const list = $('#events-list');
-
-    const fmt = iso => {
-      if (!iso) return { day: '—', rest: 'Date TBA' };
-      const d = new Date(iso + (iso.length <= 10 ? 'T00:00:00' : ''));
-      return {
-        day: d.toLocaleDateString('en-US', { day: 'numeric' }),
-        rest: d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase(),
-        weekday: d.toLocaleDateString('en-US', { weekday: 'long' })
-      };
-    };
-
-    const draw = (events) => {
-      if (!list) return;
+    
+    // Sort by date
+    allEvents.sort((a, b) => new Date(a.date || '2100-01-01') - new Date(b.date || '2100-01-01'));
+    
+    const filtersEl = $('#event-filters');
+    const listEl = $('#events-list');
+    
+    const drawEvents = (events) => {
+      if (!listEl) return;
       if (!events.length) {
-        list.innerHTML = '<div class="empty-state">No events to show yet — check back soon.</div>';
+        listEl.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📅</div><p>No events yet. Check back soon!</p></div>';
         return;
       }
-      list.innerHTML = events.map(ev => {
-        const dt = fmt(ev.date);
-        const catLabel = ev.category.replace(/-/g, ' ');
-        return `
-          <article class="event-row reveal">
-            <div class="event-date">
-              <span class="event-date-day">${dt.day}</span>
-              <span class="event-date-rest">${dt.rest}</span>
-            </div>
-            <div class="event-body">
-              <div class="event-cat">${catLabel}</div>
-              <h3 class="event-title">${ev.title || 'Untitled'}</h3>
-              ${ev.description ? `<p class="event-desc">${ev.description}</p>` : ''}
-              ${ev.location ? `<div class="event-loc">${ev.location}</div>` : ''}
-            </div>
-            <div class="event-time">${dt.weekday || ''}</div>
-          </article>
-        `;
-      }).join('');
-      initReveal();
+      
+      listEl.innerHTML = events.map(ev => `
+        <article class="event-card fade-in">
+          <div class="event-card-image">
+            ${ev.photo ? `<img src="${ev.photo}" alt="${ev.title || ''}" loading="lazy">` : '<div class="placeholder-image">📷</div>'}
+          </div>
+          <div class="event-card-body">
+            <span class="event-card-badge">${ev.category.replace(/-/g, ' ')}</span>
+            <div class="event-card-date">${formatDate(ev.date)}</div>
+            <h3 class="event-card-title">${ev.title || 'Untitled Event'}</h3>
+            ${ev.description ? `<p>${ev.description}</p>` : ''}
+            <div class="event-card-location">📍 ${ev.location || 'TBA'}</div>
+          </div>
+        </article>
+      `).join('');
+      
+      initScrollAnimations();
     };
-
-    if (filters) {
-      const present = [...new Set(all.map(e => e.category))];
-      filters.innerHTML = `
+    
+    // Build filters
+    if (filtersEl) {
+      const availableCats = [...new Set(allEvents.map(e => e.category))];
+      filtersEl.innerHTML = `
         <button class="filter-chip active" data-cat="all">All</button>
-        ${present.map(c => `<button class="filter-chip" data-cat="${c}">${c.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</button>`).join('')}
+        ${availableCats.map(cat => `
+          <button class="filter-chip" data-cat="${cat}">${cat.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</button>
+        `).join('')}
       `;
-      filters.addEventListener('click', e => {
-        const b = e.target.closest('.filter-chip');
-        if (!b) return;
-        $$('.filter-chip', filters).forEach(x => x.classList.remove('active'));
-        b.classList.add('active');
-        const c = b.dataset.cat;
-        draw(c === 'all' ? all : all.filter(ev => ev.category === c));
+      
+      filtersEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-chip');
+        if (!btn) return;
+        
+        $$('.filter-chip', filtersEl).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const cat = btn.dataset.cat;
+        drawEvents(cat === 'all' ? allEvents : allEvents.filter(ev => ev.category === cat));
       });
     }
-    draw(all);
+    
+    drawEvents(allEvents);
   }
-
-  /* -------- GALLERY -------- */
-  async function initGallery() {
+  
+  // ========================================
+  // PAGE: GALLERY
+  // ========================================
+  
+  async function initGalleryPage() {
     const grid = $('#gallery-grid');
     if (!grid) return;
+    
     const data = await loadJSON('content/gallery/index.json');
-    let items = data?.items || [];
-
-    // Fallback: surface any images from /assets/images/ that exist as visual content if no gallery
-    if (!items.length) {
-      const fallback = [
-        '20250405_233957_306a00.jpeg',
-        '20250405_233957_387929.jpeg',
-        '20250401_230352_39d3ef.jpeg',
-        '20250627_132405_347af0.jpeg',
-        '20250627_132405_374d18.jpeg',
-        '20250627_132405_31029c.jpeg'
-      ];
-      items = fallback.map(f => ({ title: '', description: '', photo: `assets/images/${f}` }));
+    if (!data || !data.items || !data.items.length) {
+      grid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📷</div><p>Photos coming soon!</p></div>';
+      return;
     }
-
-    grid.innerHTML = items.map(it => {
-      const src = (it.photo || '').replace(/^\//, '');
-      return `
-        <div class="gallery-item reveal">
-          <img src="${src}" alt="${it.title || 'Delta Chi Purdue'}" loading="lazy">
-          ${(it.title || it.description) ? `
-            <div class="gallery-overlay">
-              <div>
-                ${it.title ? `<h4>${it.title}</h4>` : ''}
-                ${it.description ? `<p>${it.description}</p>` : ''}
-              </div>
-            </div>
-          ` : ''}
+    
+    grid.innerHTML = data.items.map(item => `
+      <div class="gallery-item fade-in">
+        <img src="${item.photo}" alt="${item.title || ''}" loading="lazy">
+        <div class="gallery-overlay">
+          <div class="gallery-caption">
+            <h4>${item.title || ''}</h4>
+            <p>${item.description || ''}</p>
+          </div>
         </div>
-      `;
-    }).join('');
-
-    initReveal();
+      </div>
+    `).join('');
+    
+    initScrollAnimations();
     initLightbox();
   }
-
-  /* -------- ALUMNI -------- */
-  async function initAlumni() {
+  
+  // ========================================
+  // PAGE: ALUMNI
+  // ========================================
+  
+  async function initAlumniPage() {
     const settings = await loadJSON('content/settings.json');
-
-    const rsvp = $('#rsvp-link');
-    if (rsvp && settings?.alumni?.homecoming2025?.rsvp_url) rsvp.href = settings.alumni.homecoming2025.rsvp_url;
-
+    
+    // RSVP link
+    const rsvpLink = $('#rsvp-link');
+    if (rsvpLink && settings?.alumni?.homecoming2025?.rsvp_url) {
+      rsvpLink.href = settings.alumni.homecoming2025.rsvp_url;
+    }
+    
+    // Calendar download
     const calBtn = $('#add-to-calendar');
     if (calBtn) {
       calBtn.addEventListener('click', () => {
-        const title = 'Delta Chi Purdue — Homecoming Tailgate & House Tour';
-        const loc = '501 N Russell St, West Lafayette, IN';
-        const desc = 'House tour at 9:00 AM. Tailgate to follow.';
+        const title = 'Delta Chi Purdue – Homecoming Tailgate & House Tour';
+        const location = '501 N Russell St, West Lafayette, IN';
+        const description = 'House tour at 9:00 AM. Tailgate to follow. We can\'t wait to see you back at the house!';
         const start = '20251025T130000Z';
-        const end   = '20251025T180000Z';
+        const end = '20251025T180000Z';
+        
         const ics = [
-          'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Delta Chi Purdue//Homecoming//EN',
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//Delta Chi Purdue//Homecoming//EN',
           'BEGIN:VEVENT',
-          `UID:${(crypto.randomUUID && crypto.randomUUID()) || Date.now()}@deltachipurdue`,
-          `DTSTAMP:${new Date().toISOString().replace(/[-:]/g,'').split('.')[0]}Z`,
-          `DTSTART:${start}`, `DTEND:${end}`,
-          `SUMMARY:${title}`, `LOCATION:${loc}`, `DESCRIPTION:${desc}`,
-          'END:VEVENT','END:VCALENDAR'
+          `UID:${crypto.randomUUID()}`,
+          `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+          `DTSTART:${start}`,
+          `DTEND:${end}`,
+          `SUMMARY:${title}`,
+          `LOCATION:${location}`,
+          `DESCRIPTION:${description}`,
+          'END:VEVENT',
+          'END:VCALENDAR'
         ].join('\r\n');
+        
         const blob = new Blob([ics], { type: 'text/calendar' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
-        a.href = url; a.download = 'dx-purdue-homecoming.ics';
-        document.body.appendChild(a); a.click(); a.remove();
+        a.href = url;
+        a.download = 'dx-purdue-homecoming.ics';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
         URL.revokeObjectURL(url);
       });
     }
-
-    const nl = $('#newsletter-list');
-    if (nl) {
+    
+    // Newsletter list
+    const newsletterList = $('#newsletter-list');
+    if (newsletterList) {
       const data = await loadJSON('content/newsletters.json');
-      const items = data?.newsletters || [];
-      if (items.length) {
-        nl.innerHTML = items.slice(0, 8).map(n => {
-          const d = n.date ? new Date(n.date + (n.date.length <= 10 ? 'T00:00:00' : '')) : null;
-          const ds = d ? d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-          return `<a class="newsletter-item" href="${n.url || '#'}" target="_blank" rel="noopener">
+      if (data && data.newsletters && data.newsletters.length > 0) {
+        newsletterList.innerHTML = data.newsletters.slice(0, 5).map(n => `
+          <a href="${n.url}" target="_blank" rel="noopener" class="newsletter-item">
             <span class="newsletter-item-title">${n.title}</span>
-            <span class="newsletter-item-date">${ds}</span>
-          </a>`;
-        }).join('');
+            <span class="newsletter-item-date">${formatDateShort(n.date)}</span>
+          </a>
+        `).join('');
       } else {
-        nl.innerHTML = '<div class="newsletter-empty">Our newsletter archive is being assembled. Subscribe to be notified when the first issue ships.</div>';
+        newsletterList.innerHTML = '<p class="newsletter-empty">No newsletters yet. Subscribe to be notified!</p>';
       }
     }
   }
-
-  /* -------- DONATE -------- */
-  async function initDonate() {
+  
+  // ========================================
+  // PAGE: DONATE
+  // ========================================
+  
+  async function initDonatePage() {
     const settings = await loadJSON('content/settings.json');
+    
+    // Donation links
     const donateAlumni = $('#donate-link-alumni');
     const donateFamily = $('#donate-link-family');
-    if (donateAlumni && settings?.donate?.url) donateAlumni.href = settings.donate.url;
-    if (donateFamily && settings?.donate?.url_family) donateFamily.href = settings.donate.url_family;
-
+    
+    if (donateAlumni && settings?.donate?.url) {
+      donateAlumni.href = settings.donate.url;
+    }
+    if (donateFamily && settings?.donate?.url_family) {
+      donateFamily.href = settings.donate.url_family;
+    }
+    
+    // Tabs
     $$('.donate-tabs .tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         $$('.donate-tabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -333,48 +435,50 @@
         $(`#panel-${btn.dataset.tab}`)?.classList.add('active');
       });
     });
-
+    
+    // Goals
     const goalsList = $('#goals-list');
     if (goalsList) {
-      const data = await loadJSON('content/goals.json');
-      const goals = data?.goals || [];
-      if (goals.length) {
-        goalsList.innerHTML = goals.map(g => {
+      const goalsData = await loadJSON('content/goals.json');
+      if (goalsData && goalsData.goals && goalsData.goals.length > 0) {
+        goalsList.innerHTML = goalsData.goals.map(g => {
           const goal = Number(g.goal_amount || 0);
-          const cur  = Number(g.current_amount || 0);
-          const pct  = goal > 0 ? Math.min(100, Math.round((cur / goal) * 100)) : 0;
+          const current = Number(g.current_amount || 0);
+          const pct = goal > 0 ? Math.round((current / goal) * 100) : 0;
           return `
-            <div class="goal-card reveal">
+            <div class="goal-card fade-in">
               <div class="goal-header">
                 <span class="goal-title">${g.title}</span>
-                <span class="goal-amount">$${cur.toLocaleString()} / $${goal.toLocaleString()}</span>
+                <span class="goal-amount">$${current.toLocaleString()} / $${goal.toLocaleString()}</span>
               </div>
-              <div class="progress-bar"><div class="progress-fill" style="width:0%" data-pct="${pct}"></div></div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: ${clamp(pct, 0, 100)}%"></div>
+              </div>
             </div>
           `;
         }).join('');
-        // Animate fill after layout
-        setTimeout(() => {
-          $$('.progress-fill').forEach(f => { f.style.width = f.dataset.pct + '%'; });
-        }, 200);
       } else {
-        goalsList.innerHTML = '<div class="empty-state">No active goals listed.</div>';
+        goalsList.innerHTML = '<p class="empty-state">No active goals right now.</p>';
       }
     }
-
+    
+    // Donors
     const donorFilters = $('#donor-filters');
     const donorList = $('#donor-list');
+    
     if (donorFilters && donorList) {
-      const dd = await loadJSON('content/donors.json');
-      const donors = dd?.donors || [];
-      const draw = (type) => {
+      const donorData = await loadJSON('content/donors.json');
+      const donors = donorData?.donors || [];
+      
+      const drawDonors = (type) => {
         const filtered = type === 'all' ? donors : donors.filter(d => d.type === type);
         if (!filtered.length) {
-          donorList.innerHTML = '<div class="empty-state">Be the first to add your name to the donor wall.</div>';
+          donorList.innerHTML = '<p class="empty-state">No donors to display yet. Be the first!</p>';
           return;
         }
+        
         donorList.innerHTML = filtered.map(d => `
-          <div class="donor-card reveal">
+          <div class="donor-card fade-in">
             <span class="donor-badge">${d.type === 'family' ? 'Family & Friends' : 'Alumni'}</span>
             <div class="donor-name">${d.name || 'Anonymous'}</div>
             ${d.type === 'alumni' && d.class_year ? `<div class="donor-detail">Class of ${d.class_year}</div>` : ''}
@@ -382,83 +486,147 @@
             ${d.message ? `<div class="donor-message">"${d.message}"</div>` : ''}
           </div>
         `).join('');
-        initReveal();
+        
+        initScrollAnimations();
       };
+      
       donorFilters.innerHTML = `
         <button class="filter-chip active" data-type="all">All</button>
         <button class="filter-chip" data-type="alumni">Alumni</button>
         <button class="filter-chip" data-type="family">Family & Friends</button>
       `;
-      donorFilters.addEventListener('click', e => {
-        const b = e.target.closest('.filter-chip');
-        if (!b) return;
-        $$('.filter-chip', donorFilters).forEach(x => x.classList.remove('active'));
-        b.classList.add('active');
-        draw(b.dataset.type);
+      
+      donorFilters.addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-chip');
+        if (!btn) return;
+        $$('.filter-chip', donorFilters).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        drawDonors(btn.dataset.type);
       });
-      draw('all');
+      
+      drawDonors('all');
     }
-
-    initReveal();
+    
+    initScrollAnimations();
   }
-
-  /* -------- INITIATIVES -------- */
-  async function initInitiatives() {
+  
+  // ========================================
+  // PAGE: RUSH
+  // ========================================
+  
+  async function initRushPage() {
+    // Load career outcomes for rush page too
+    const careersGrid = $('#rush-careers-grid');
+    if (careersGrid) {
+      const data = await loadJSON('content/careers.json');
+      if (data && data.placements && data.placements.length > 0) {
+        careersGrid.innerHTML = data.placements.map(p => `
+          <div class="career-card fade-in">
+            ${p.logo ? `<img src="${p.logo}" alt="${p.company}" class="career-card-logo">` : ''}
+            <div class="career-card-company">${p.company}</div>
+            <div class="career-card-role">${p.role}</div>
+            <div class="career-card-year">${p.year}</div>
+          </div>
+        `).join('');
+      } else {
+        careersGrid.innerHTML = '<p class="empty-state">Internship data coming soon!</p>';
+      }
+    }
+    
+    initScrollAnimations();
+  }
+  
+  // ========================================
+  // PAGE: INITIATIVES
+  // ========================================
+  
+  async function initInitiativesPage() {
     const data = await loadJSON('content/initiatives.json');
     if (!data) return;
-    const cats = ['brotherhood', 'community-service', 'philanthropy', 'fundraising'];
-    const tabsEl = $('#init-tabs');
-    const listEl = $('#init-list');
-
-    const draw = (cat) => {
+    
+    const categories = ['brotherhood', 'community-service', 'philanthropy', 'fundraising'];
+    const tabs = $('#init-tabs');
+    const list = $('#init-list');
+    
+    const drawCategory = (cat) => {
       const items = data[cat] || [];
       if (!items.length) {
-        listEl.innerHTML = '<div class="empty-state">No initiatives in this category yet.</div>';
+        list.innerHTML = '<p class="empty-state">No initiatives in this category yet.</p>';
         return;
       }
-      listEl.innerHTML = items.map((it, i) => `
-        <article class="init-card reveal r-${(i % 4) + 1}">
-          <span class="init-card-tag">${cat.replace(/-/g, ' ')}</span>
-          <h3>${it.title}</h3>
-          <p>${it.description}</p>
-        </article>
+      
+      list.innerHTML = items.map(item => `
+        <div class="initiative-card fade-in">
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+        </div>
       `).join('');
-      initReveal();
+      
+      initScrollAnimations();
     };
-
-    if (tabsEl) {
-      tabsEl.innerHTML = cats.map((c, i) => `
-        <button class="tab-btn ${i === 0 ? 'active' : ''}" data-cat="${c}">
-          ${c.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+    
+    if (tabs) {
+      tabs.innerHTML = categories.map((cat, i) => `
+        <button class="tab-btn ${i === 0 ? 'active' : ''}" data-cat="${cat}">
+          ${cat.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
         </button>
       `).join('');
-      tabsEl.addEventListener('click', e => {
-        const b = e.target.closest('.tab-btn');
-        if (!b) return;
-        $$('.tab-btn', tabsEl).forEach(x => x.classList.remove('active'));
-        b.classList.add('active');
-        draw(b.dataset.cat);
+      
+      tabs.addEventListener('click', (e) => {
+        const btn = e.target.closest('.tab-btn');
+        if (!btn) return;
+        $$('.tab-btn', tabs).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        drawCategory(btn.dataset.cat);
       });
     }
-    draw(cats[0]);
+    
+    drawCategory(categories[0]);
   }
-
-  /* -------- INIT -------- */
+  
+  // ========================================
+  // INITIALIZATION
+  // ========================================
+  
   async function init() {
-    initReveal();
     const page = document.body.dataset.page || '';
+    
+    // Common initialization
+    initScrollAnimations();
+    
+    // Page-specific initialization
     switch (page) {
-      case 'home':         await initHome(); break;
-      case 'leadership':   await initLeadership(); break;
-      case 'events':       await initEvents(); break;
-      case 'gallery':      await initGallery(); break;
-      case 'alumni':       await initAlumni(); break;
-      case 'donate':       await initDonate(); break;
-      case 'initiatives':  await initInitiatives(); break;
+      case 'home':
+        await initHomePage();
+        break;
+      case 'leadership':
+        await initLeadershipPage();
+        break;
+      case 'events':
+        await initEventsPage();
+        break;
+      case 'gallery':
+        await initGalleryPage();
+        break;
+      case 'alumni':
+        await initAlumniPage();
+        break;
+      case 'donate':
+        await initDonatePage();
+        break;
+      case 'rush':
+        await initRushPage();
+        break;
+      case 'initiatives':
+        await initInitiativesPage();
+        break;
     }
-    initReveal();
   }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();
