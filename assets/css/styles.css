@@ -1831,6 +1831,35 @@ textarea.form-input {
   gap: var(--space-lg);
 }
 
+.rush-schedule {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.rush-schedule-item {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 120px 1fr;
+  gap: var(--space-sm);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.rush-schedule-date {
+  font-weight: 600;
+}
+
+.rush-schedule-time,
+.rush-schedule-event {
+  color: var(--gray-600);
+}
+
+@media (max-width: 600px) {
+  .rush-schedule-item {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
+
 .timeline {
   position: relative;
   max-width: 600px;
