@@ -117,11 +117,9 @@
     if (!spotlightSection) return;
 
     const image = spotlightSection.querySelector('.spotlight-image img');
-    const hideBrokenSpotlightImage = () => image?.closest('.spotlight-image')?.setAttribute('hidden', '');
-    if (image) {
-      image.addEventListener('error', hideBrokenSpotlightImage, { once: true });
-      if (!image.getAttribute('src')) hideBrokenSpotlightImage();
-    }
+    const imageContainer = image?.closest('.spotlight-image');
+    const hideSpotlightImage = () => imageContainer?.setAttribute('hidden', '');
+    const showSpotlightImage = () => imageContainer?.removeAttribute('hidden');
 
     try {
       const data = await loadJSON('content/alumni-spotlights.json');
@@ -137,6 +135,18 @@
         if (avatarEl && s.photo) avatarEl.src = s.photo;
         if (nameEl && s.name) nameEl.textContent = s.name;
         if (titleEl) titleEl.textContent = `${s.title || ''} ${s.company ? '• ' + s.company : ''}`.trim();
+
+        if (image) {
+          const featurePhoto = (s.feature_photo || '').trim();
+          if (featurePhoto) {
+            image.addEventListener('error', hideSpotlightImage, { once: true });
+            image.src = featurePhoto;
+            image.alt = s.name ? `${s.name} alumni spotlight` : 'Featured alumnus';
+            showSpotlightImage();
+          } else {
+            hideSpotlightImage();
+          }
+        }
       }
     } catch (e) {}
   }

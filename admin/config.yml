@@ -285,7 +285,8 @@ collections:
               - { label: "Current Title", name: "title", widget: "string" }
               - { label: "Company", name: "company", widget: "string" }
               - { label: "Quote", name: "quote", widget: "text", hint: "Their testimonial about Delta Chi" }
-              - { label: "Photo", name: "photo", widget: "image", required: false }
+              - { label: "Avatar / Headshot Photo", name: "photo", widget: "image", required: false, hint: "Small avatar/headshot shown beside the alumni spotlight quote" }
+              - { label: "Feature Photo", name: "feature_photo", widget: "image", required: false, hint: "Larger image shown on the right side of the alumni spotlight" }
 
   # ============================================
   # CAREER OUTCOMES
