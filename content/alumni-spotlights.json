@@ -6,7 +6,8 @@
       "title": "Plant Manager",
       "company": "Caterpillar Lafayette",
       "quote": "Quote here",
-      "photo": ""
+      "photo": "",
+      "feature_photo": ""
     }
   ]
 }
