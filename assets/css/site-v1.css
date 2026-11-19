@@ -106,6 +106,7 @@ a:focus-visible, button:focus-visible {
   font-weight: 550;
 }
 .site-nav a:hover { color: var(--red); text-decoration: underline; text-underline-offset: .3em; }
+.site-nav a[aria-current="page"] { color: var(--red); }
 .button {
   display: inline-flex;
   align-items: center;
@@ -288,8 +289,6 @@ a:focus-visible, button:focus-visible {
   text-decoration: underline;
   text-underline-offset: .29em;
 }
-.chapter-detail .text-link { margin-top: .75rem; }
-
 .recruitment { background: var(--red); color: var(--paper); }
 .recruitment-inner {
   display: grid;
@@ -303,6 +302,29 @@ a:focus-visible, button:focus-visible {
 .recruitment p { max-width: 27rem; }
 .recruitment-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.3rem; margin-top: 1.25rem; }
 .recruitment .text-link { color: var(--paper); }
+.interest-form-note { margin-top: .7rem; color: #f2d9d0; font-size: .86rem; }
+
+.interior-intro {
+  padding-block: clamp(3.2rem, 8vw, 7rem);
+  background: var(--red);
+  color: var(--paper);
+}
+.interior-intro .eyebrow { color: var(--gold); }
+.interior-intro .section-title { max-width: 18ch; }
+.interior-intro .intro-copy {
+  max-width: 35rem;
+  margin-top: 1.15rem;
+  font-size: clamp(1rem, 1.7vw, 1.2rem);
+}
+.interior-intro .button { margin-top: 1.5rem; }
+.giving-detail {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(1.55rem, 6vw, 5rem);
+  padding-block: clamp(2.4rem, 6vw, 5.5rem);
+}
+.giving-detail h2 { font: 400 clamp(2rem, 4vw, 3.7rem)/1 var(--serif); margin-bottom: .7rem; }
+.giving-detail p { max-width: 35rem; color: var(--muted); }
 
 .site-footer { background: #271b1c; color: var(--paper); }
 .footer-main {
@@ -362,7 +384,7 @@ a:focus-visible, button:focus-visible {
   }
   .hero h1 { font-size: clamp(4.55rem, 14.5vw, 7rem); }
   .hero-description { max-width: 23rem; }
-  .chapter-intro, .chapter-detail, .recruitment-inner { grid-template-columns: 1fr; }
+  .chapter-intro, .chapter-detail, .recruitment-inner, .giving-detail { grid-template-columns: 1fr; }
   .chapter-intro > p { padding-left: 0; border-left: 0; }
   .chapter-detail { gap: 1.7rem; }
   .footer-main { grid-template-columns: 1fr 1fr; column-gap: 1rem; }

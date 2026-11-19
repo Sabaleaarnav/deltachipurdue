@@ -34,6 +34,8 @@
         `).join('')}
       </ul>
       
+      <a class="nav-cta" href="admin/">Admin</a>
+      
       <button type="button" class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
         <span class="nav-toggle-icon">
           <span></span>
@@ -41,7 +43,6 @@
           <span></span>
         </span>
       </button>
-      <a class="nav-cta" href="https://deltachi-housing.onrender.com/">Member Login <span aria-hidden="true">↗</span></a>
     </nav>
     
     <div class="mobile-drawer" id="mobileNav" aria-hidden="true">
@@ -49,6 +50,7 @@
         ${nav.map(n => `
           <a class="drawer-link ${page === n.id ? 'active' : ''}" href="${n.href}">${n.label}</a>
         `).join('')}
+        <a class="drawer-cta" href="admin/">Admin Login</a>
       </nav>
     </div>
   `;

@@ -1,155 +1,80 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Support Delta Chi Purdue. Your donation helps fund programming, service projects, and scholarships.">
-  
-  <title>Donate — Delta Chi Purdue</title>
-  <link rel="stylesheet" href="assets/css/styles.css?v=2">
+  <meta name="description" content="Learn how to support the Delta Chi chapter at Purdue University.">
+  <meta name="theme-color" content="#f7f2e9">
+  <title>Giving · Delta Chi at Purdue</title>
+  <link rel="canonical" href="https://deltachipurdue.org/donate">
+  <link rel="stylesheet" href="/assets/css/site-v1.css">
 </head>
-<body data-page="donate">
-  <header id="site-header" class="site-header"></header>
-  
-  <main>
-    <!-- Hero -->
-    <section class="donate-hero section-gray">
-      <div class="container">
-        <div class="section-header fade-in" style="padding-top: var(--header-height);">
-          <span class="overline">Give Back</span>
-          <h2 class="headline-lg">Support ΔΧ Purdue</h2>
-          <p>Your generosity helps us build leaders, serve our community, and create lasting memories.</p>
-        </div>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="/" aria-label="Delta Chi at Purdue, home">
+        <span class="monogram" aria-hidden="true">ΔΧ</span>
+        <span class="wordmark-name"><strong>Delta Chi</strong><small>Purdue University</small></span>
+      </a>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="/#about">About</a>
+        <a href="/#recruitment">Recruitment</a>
+        <a href="/donate" aria-current="page">Giving</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <a class="button member-login" href="https://deltachi-housing.onrender.com/">Member Login <span class="arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="interior-intro" aria-labelledby="giving-title">
+      <div class="shell">
+        <p class="eyebrow">Giving</p>
+        <h1 class="section-title" id="giving-title">Support Delta&nbsp;Chi at Purdue.</h1>
+        <p class="intro-copy">Alumni, families, and friends can help fund chapter programming, community service, and scholarships.</p>
+        <a class="button button-light" href="mailto:alumni@deltachipurdue.org?subject=Giving%20to%20Delta%20Chi%20Purdue">Ask About Giving <span class="arrow" aria-hidden="true">↗</span></a>
       </div>
     </section>
-    
-    <section class="section">
-      <div class="container">
-        <!-- Donor Type Tabs -->
-        <div class="donate-tabs">
-          <button class="tab-btn active" data-tab="alumni">Alumni</button>
-          <button class="tab-btn" data-tab="family">Parents & Family</button>
-        </div>
-        
-        <!-- Alumni Panel -->
-        <div class="donate-panel active" id="panel-alumni">
-          <div class="donate-card fade-in">
-            <h3>Alumni Giving</h3>
-            <p class="donate-description">
-              Support your chapter and leave a legacy. All gifts support programming, service projects, and scholarship.
-            </p>
-            
-            <!-- Zeffy Placeholder -->
-            <div class="donation-embed-placeholder">
-              <p><strong>Donation platform coming soon</strong></p>
-              <p style="font-size: 0.875rem; margin-top: 0.5rem;">
-                We're integrating a 100% free donation platform (Zeffy) so every dollar goes directly to the chapter.
-              </p>
-              <p style="font-size: 0.875rem; margin-top: 0.5rem;">
-                In the meantime, use the link below:
-              </p>
-            </div>
-            
-            <div class="donate-cta-group mt-lg">
-              <a id="donate-link-alumni" href="#" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="width: 100%;">
-                Donate via OmegaFi
-              </a>
-            </div>
-            
-            <p class="caption text-center mt-md" style="color: var(--gray-600);">
-              Add your name to our Donor Wall after giving.
-            </p>
-          </div>
-        </div>
-        
-        <!-- Family Panel -->
-        <div class="donate-panel" id="panel-family">
-          <div class="donate-card fade-in">
-            <h3>Parents & Family Giving</h3>
-            <p class="donate-description">
-              Support your student and the Delta Chi experience. Your gift helps fund chapter activities, house improvements, and more.
-            </p>
-            
-            <!-- Zeffy Placeholder -->
-            <div class="donation-embed-placeholder">
-              <p><strong>Donation platform coming soon</strong></p>
-              <p style="font-size: 0.875rem; margin-top: 0.5rem;">
-                We're integrating a 100% free donation platform so every dollar goes directly to supporting our brothers.
-              </p>
-            </div>
-            
-            <div class="donate-cta-group mt-lg">
-              <a id="donate-link-family" href="#" target="_blank" rel="noopener" class="btn btn-gold btn-lg" style="width: 100%;">
-                Donate Now
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Goals -->
-        <div class="goals-section">
-          <div class="section-header fade-in">
-            <h3 class="headline-md">Chapter Goals</h3>
-            <p>Track our progress on current fundraising initiatives.</p>
-          </div>
-          
-          <div id="goals-list">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-        
-        <!-- Donor Wall -->
-        <div class="donor-wall mt-xl">
-          <div class="section-header fade-in">
-            <h3 class="headline-md">Donor Wall</h3>
-            <p>Thank you to everyone who has supported Delta Chi Purdue.</p>
-          </div>
-          
-          <div class="filters" id="donor-filters">
-            <!-- Populated by JS -->
-          </div>
-          
-          <div class="donors-grid" id="donor-list">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Impact Section -->
-    <section class="section section-gray">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="overline">Your Impact</span>
-          <h3 class="headline-md">Where Your Gift Goes</h3>
-        </div>
-        
-        <div class="grid grid-3">
-          <div class="value-card fade-in stagger-1">
-            <div class="value-icon">🎓</div>
-            <h3 class="value-title">Scholarships</h3>
-            <p class="value-text">Support brothers who demonstrate academic excellence and financial need.</p>
-          </div>
-          
-          <div class="value-card fade-in stagger-2">
-            <div class="value-icon">🏠</div>
-            <h3 class="value-title">House Improvements</h3>
-            <p class="value-text">Maintain and upgrade our historic chapter house for future generations.</p>
-          </div>
-          
-          <div class="value-card fade-in stagger-3">
-            <div class="value-icon">🌟</div>
-            <h3 class="value-title">Programming</h3>
-            <p class="value-text">Fund leadership development, brotherhood events, and service projects.</p>
-          </div>
-        </div>
-      </div>
+
+    <section class="giving-detail shell" aria-labelledby="giving-contact">
+      <h2 id="giving-contact">Talk with the chapter.</h2>
+      <p>Our alumni relations team can share current priorities and help you find the right way to give.</p>
     </section>
   </main>
-  
-  <footer id="site-footer" class="site-footer"></footer>
-  
-  <script src="assets/js/shell.js?v=2"></script>
-  <script src="assets/js/app.js" defer></script>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-main">
+        <div>
+          <a class="wordmark" href="/" aria-label="Delta Chi at Purdue, home">
+            <span class="monogram" aria-hidden="true">ΔΧ</span>
+            <span class="wordmark-name"><strong>Delta Chi</strong><small>Purdue University</small></span>
+          </a>
+          <address>501 N Russell St<br>West Lafayette, IN 47906</address>
+        </div>
+        <nav aria-label="Chapter links">
+          <h2 class="footer-heading">Chapter</h2>
+          <ul class="footer-links">
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#recruitment">Recruitment</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Giving and contact links">
+          <h2 class="footer-heading">Connect</h2>
+          <ul class="footer-links">
+            <li><a href="mailto:alumni@deltachipurdue.org">Email Alumni Relations</a></li>
+            <li><a href="https://www.instagram.com/deltachipurdue/">Instagram</a></li>
+            <li><a href="/admin/">Content Manager</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="footer-bottom">Delta Chi Fraternity · Purdue University Chapter</p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/navigation-v1.js"></script>
 </body>
 </html>
