@@ -1,172 +1,143 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Delta Chi Fraternity at Purdue University. Chartered April 2026. Building men of character since 1927.">
-  <meta name="theme-color" content="#8B0000">
-  
-  <title>Delta Chi Purdue — Building Men of Character</title>
-  
-  <link rel="stylesheet" href="assets/css/styles.css">
-  
-  <!-- Preconnect for performance -->
-  <link rel="preconnect" href="https://identity.netlify.com">
-  
-  <!-- Netlify Identity -->
-  <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <meta name="description" content="Meet the Purdue chapter of Delta Chi in West Lafayette. Explore recruitment, get to know the chapter, and connect with fellow alumni.">
+  <meta name="theme-color" content="#f7f2e9">
+  <title>Delta Chi at Purdue</title>
+  <link rel="canonical" href="https://deltachipurdue.org/">
+  <link rel="stylesheet" href="/assets/css/homepage-v1.css">
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on('init', (user) => {
-        window.netlifyIdentity.on('login', () => {
-          window.location.href = '/admin/';
-        });
-      });
+    // Keep Netlify Identity email links working when they land on the homepage.
+    const identityParams = new URLSearchParams(window.location.hash.slice(1));
+    const identityTokens = ["invite_token", "recovery_token", "confirmation_token", "email_change_token", "access_token"];
+    if (identityTokens.some((token) => identityParams.has(token))) {
+      window.location.replace("/admin/" + window.location.hash);
     }
   </script>
 </head>
-<body data-page="home">
-  <header id="site-header" class="site-header"></header>
-  
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="hero-bg">
-        <img src="assets/images/hero-bg.jpg" alt="" loading="eager" id="hero-image">
+<body id="top">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="wordmark" href="#top" aria-label="Delta Chi at Purdue, home">
+        <span class="monogram" aria-hidden="true">ΔΧ</span>
+        <span class="wordmark-name"><strong>Delta Chi</strong><small>Purdue University</small></span>
+      </a>
+      <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#recruitment">Recruitment</a>
+        <a href="/alumni.html">Alumni</a>
+      </nav>
+      <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="site-nav" aria-expanded="false">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <a class="button member-login" href="https://deltachi-housing.onrender.com/">Member Login <span class="arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <!-- Exterior photo from https://501russell.com/gallery/ -->
+      <div class="hero-photo" aria-hidden="true">
+        <img src="/assets/images/501-russell-exterior.webp" width="1720" height="1290" alt="" fetchpriority="high">
       </div>
-      <div class="hero-content">
-        <span class="hero-overline fade-in">Chartered April 2026</span>
-        <h1 class="hero-title fade-in stagger-1">Delta Chi</h1>
-        <p class="hero-subtitle fade-in stagger-2">Building men of character at Purdue University since 1927.</p>
-        
-        <div class="hero-stats fade-in stagger-3">
-          <div class="hero-stat">
-            <div class="hero-stat-value">68</div>
-            <div class="hero-stat-label">Brothers</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-value">1927</div>
-            <div class="hero-stat-label">Established</div>
-          </div>
-          <div class="hero-stat">
-            <div class="hero-stat-value">97</div>
-            <div class="hero-stat-label">Years of Legacy</div>
-          </div>
-        </div>
-        
-        <div class="hero-ctas fade-in stagger-4">
-          <a href="rush.html" class="btn btn-gold btn-lg">Rush ΔΧ</a>
-          <a href="alumni.html" class="btn btn-outline btn-lg">Alumni Connect</a>
-        </div>
+      <div class="shell hero-inner">
+        <p class="eyebrow">The Purdue chapter</p>
+        <h1 id="hero-title">Delta Chi <em>at Purdue.</em></h1>
+        <p class="hero-description">Brotherhood, service, and a place to call home in West Lafayette.</p>
+        <a class="button button-light" href="#recruitment">Explore Recruitment <span class="arrow" aria-hidden="true">↗</span></a>
       </div>
-      
-      <div class="hero-scroll">
-        <div class="hero-scroll-icon"></div>
-        <span>Scroll</span>
-      </div>
+      <p class="photo-caption">The chapter house · 501 N Russell St</p>
     </section>
-    
-    <!-- VALUES -->
-    <section class="section section-lg">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="overline">Our Foundation</span>
-          <h2 class="headline-lg">Four Pillars of Excellence</h2>
-          <p>The principles that guide every brother of Delta Chi.</p>
+    <div class="heritage">
+      <div class="shell heritage-inner">
+        <span>Established at Purdue in 1927</span>
+        <span class="heritage-line" aria-hidden="true"></span>
+        <span>West Lafayette, Indiana</span>
+      </div>
+    </div>
+
+    <section class="chapter shell" id="about" aria-labelledby="about-title" tabindex="-1">
+      <div class="chapter-intro">
+        <div>
+          <p class="eyebrow">About Delta Chi</p>
+          <h2 class="section-title" id="about-title">A brotherhood built to last.</h2>
         </div>
-        
-        <div class="grid grid-4">
-          <div class="value-card fade-in stagger-1">
-            <div class="value-icon">🤝</div>
-            <h3 class="value-title">Promote Friendship</h3>
-            <p class="value-text">We bring together men of similar interests and character to form bonds that last far beyond graduation.</p>
+        <p>Delta Chi first came to Purdue in 1927 and returned to campus in 2024. Today, brothers volunteer in Greater Lafayette, raise funds for the V Foundation, and help each other make the most of their time at Purdue.</p>
+      </div>
+      <div class="chapter-detail">
+        <figure>
+          <div class="chapter-photo">
+            <img src="/assets/images/chapter-cleanup.webp" width="1080" height="810" alt="Chapter members pose together with bags of collected litter after a cleanup." loading="lazy">
           </div>
-          
-          <div class="value-card fade-in stagger-2">
-            <div class="value-icon">🧭</div>
-            <h3 class="value-title">Develop Character</h3>
-            <p class="value-text">Integrity, scholarship, and leadership define our members—on campus, at work, and in the community.</p>
-          </div>
-          
-          <div class="value-card fade-in stagger-3">
-            <div class="value-icon">⚖️</div>
-            <h3 class="value-title">Advance Justice</h3>
-            <p class="value-text">We do the right thing even when it's not popular—standing up for what's fair and respectful.</p>
-          </div>
-          
-          <div class="value-card fade-in stagger-4">
-            <div class="value-icon">🎓</div>
-            <h3 class="value-title">Sound Education</h3>
-            <p class="value-text">Study groups, mentoring, and scholarship support help every brother reach his full potential.</p>
-          </div>
+          <figcaption>Delta Chi brothers at a community cleanup.</figcaption>
+        </figure>
+        <div>
+          <h3 class="eyebrow">Our four pillars</h3>
+          <ul class="values">
+            <li>Promote friendship</li>
+            <li>Develop character</li>
+            <li>Advance justice</li>
+            <li>Support a sound education</li>
+          </ul>
+          <a class="text-link" href="/leadership.html">Meet our leadership <span class="arrow" aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
-    
-    <!-- CAREER OUTCOMES -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="overline">2026 Placements</span>
-          <h2 class="headline-lg">Where Brothers Intern</h2>
-          <p>Our network opens doors to leading companies.</p>
+
+    <section class="recruitment" id="recruitment" aria-labelledby="recruitment-title" tabindex="-1">
+      <div class="shell recruitment-inner">
+        <div>
+          <p class="eyebrow">Recruitment</p>
+          <h2 class="section-title" id="recruitment-title">Come meet the chapter.</h2>
         </div>
-        
-        <div class="careers-showcase" id="careers-grid">
-          <!-- Populated by JS -->
-          <p class="empty-state fade-in">Internship data coming soon. Check back for 2026 placements!</p>
-        </div>
-        
-        <div class="text-center mt-lg fade-in">
-          <a href="rush.html" class="link-btn">
-            See what joining ΔΧ can do for you 
-            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M6.5 3.5l4 4.5-4 4.5" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
-          </a>
-        </div>
-      </div>
-    </section>
-    
-    <!-- INSTAGRAM PLACEHOLDER -->
-    <section class="section section-gray instagram-section">
-      <div class="container">
-        <div class="section-header fade-in">
-          <span class="overline">@deltachipurdue</span>
-          <h2 class="headline-lg">Life at ΔΧ</h2>
-          <p>Follow along on Instagram.</p>
-        </div>
-        
-        <div class="instagram-placeholder fade-in">
-          <div class="instagram-placeholder-item"></div>
-          <div class="instagram-placeholder-item"></div>
-          <div class="instagram-placeholder-item"></div>
-          <div class="instagram-placeholder-item"></div>
-        </div>
-        
-        <div class="text-center mt-lg fade-in">
-          <a href="https://instagram.com/deltachipurdue" target="_blank" rel="noopener" class="btn btn-outline-dark">
-            Follow @deltachipurdue
-          </a>
-        </div>
-      </div>
-    </section>
-    
-    <!-- CTA -->
-    <section class="section section-maroon">
-      <div class="container text-center">
-        <h2 class="headline-lg fade-in" style="color: var(--white);">Ready to Join?</h2>
-        <p class="fade-in stagger-1" style="color: rgba(255,255,255,0.8); max-width: 500px; margin: 0 auto var(--space-lg);">
-          Discover what it means to be part of something bigger than yourself.
-        </p>
-        <div class="fade-in stagger-2">
-          <a href="rush.html" class="btn btn-gold btn-lg">Learn About Rush</a>
+        <div>
+          <p>Thinking about rushing Delta Chi? Reach out to meet the brothers, ask about upcoming rush events, or set up a house tour.</p>
+          <div class="recruitment-actions">
+            <a class="button button-light" href="mailto:recruitment@deltachipurdue.org">Email Recruitment <span class="arrow" aria-hidden="true">↗</span></a>
+            <a class="text-link" href="https://www.instagram.com/deltachipurdue/">DM on Instagram <span class="arrow" aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </div>
     </section>
   </main>
-  
-  <footer id="site-footer" class="site-footer"></footer>
-  
-  <script src="assets/js/shell.js"></script>
-  <script src="assets/js/app.js" defer></script>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-main">
+        <div>
+          <a class="wordmark" href="#top" aria-label="Delta Chi at Purdue, back to top">
+            <span class="monogram" aria-hidden="true">ΔΧ</span>
+            <span class="wordmark-name"><strong>Delta Chi</strong><small>Purdue University</small></span>
+          </a>
+          <address><a href="https://www.google.com/maps/search/?api=1&amp;query=501+N+Russell+St+West+Lafayette+IN+47906">501 N Russell St<br>West Lafayette, IN 47906</a></address>
+        </div>
+        <nav aria-label="Chapter links">
+          <h2 class="footer-heading">Chapter</h2>
+          <ul class="footer-links">
+            <li><a href="/rush.html">Rush information</a></li>
+            <li><a href="/leadership.html">Leadership</a></li>
+            <li><a href="/events.html">Events</a></li>
+            <li><a href="/gallery.html">Gallery</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Alumni and contact links">
+          <h2 class="footer-heading">Connect</h2>
+          <ul class="footer-links">
+            <li><a href="/alumni.html">Alumni</a></li>
+            <li><a href="/donate.html">Support the chapter</a></li>
+            <li><a href="mailto:purduedeltachi@gmail.com">Email the chapter</a></li>
+            <li><a href="https://www.instagram.com/deltachipurdue/">Instagram</a></li>
+            <li><a href="/admin/">Content Manager</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="footer-bottom">Delta Chi Fraternity · Purdue University Chapter</p>
+    </div>
+  </footer>
+
+  <script src="/assets/js/homepage-v1.js"></script>
 </body>
 </html>

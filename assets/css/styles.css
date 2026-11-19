@@ -323,6 +323,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
   margin-left: 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
@@ -330,6 +334,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--white);
   background: var(--maroon);
   border-radius: 999px;
+  white-space: nowrap;
   transition: background var(--duration-fast) var(--ease-out),
               transform var(--duration-fast) var(--ease-out);
 }
@@ -459,13 +464,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 900px) {
-  .nav-menu,
-  .nav-cta {
+  .nav-menu {
     display: none;
   }
   
   .nav-toggle {
     display: flex;
+    margin-left: auto;
+  }
+
+  .nav-cta {
+    padding-inline: 0.65rem;
+    font-size: 0.8rem;
   }
 }
 
